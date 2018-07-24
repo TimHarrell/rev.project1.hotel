@@ -1,0 +1,39 @@
+/* button properties */
+.dropbuttonaccount {
+	background-color: blue;
+	color: white;
+	padding 16px;
+	font-size: 12px;
+	border:none;
+}
+
+/*div container specification for for positioning drop down content (outer div) */
+.dropdownaccount {
+	position: relative;
+	display:inline-block;
+}
+
+/* dropdown content properties */
+.dropdownaccount-content {
+	display: none;
+	position: absolute;
+	background-color: gray;
+	min-width: 160px;
+}
+
+/*  properties inside links inside the dropdown */ 
+.dropdownaccount-content a {
+	color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hovor */
+.dropdownaccount-content a:hovor {background-color: blue; }
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdownaccount-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbuttonaccount {background-color: #3e8e41;}
