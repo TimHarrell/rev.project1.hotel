@@ -1,0 +1,81 @@
+Message Board (MB)
+
+
+
+-A User can login
+
+-A User can view their dashboard
+
+-A User can logout
+
+-A User can view all topics
+
+-A User can view all replies to a topic
+
+-A User can post a topic
+
+-A User can reply to a topic
+
+-A User can upload an image to their post or reply
+
+-A User can flag a post
+
+-A User can view their replies
+
+-A User can view their profile
+
+-A User can update their profile
+
+
+
+-An Administrator can login
+
+-An Administrator can view their dashboard
+
+-An Administrator can logout
+
+-An Administrator can view flagged posts
+
+-An Administrator can edit or delete flagged posts
+
+-An Administrator can view all topics
+
+-An Administrator can view all Users
+
+
+
+------------------------------------------------------------------
+
+-An Administrator can register a User, which sends the User an email with their Username and temp password (optional)
+
+-A User can reset their password (optional)
+
+
+
+
+
+Technologies:
+
+-Servlets
+
+-JDBC
+
+-PL/SQL
+
+-HTML5/CSS3
+
+-Javascript/AJAX
+
+-JUnit
+
+
+
+
+
+Environment:
+
+-Tomcat Server (localhost or AWS EC2)
+
+-Oracle 11g Database (localhost or AWS RDS)
+
+-Java 1.8
