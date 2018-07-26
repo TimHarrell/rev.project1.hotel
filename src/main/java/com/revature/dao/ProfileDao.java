@@ -36,7 +36,7 @@ public class ProfileDao {
 				String storedUserId = rs.getString("userID");
 				String storedFirstname = rs.getString("firstname");
 				String storedLastname = rs.getString("lastname");
-				String storedPassword = rs.getString("password");
+				String storedPassword = rs.getString("pssword");
 			
 			rs.close();
 			ps.close();

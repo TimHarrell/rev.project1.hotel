@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.beans.Profile;
 import com.revature.dao.ProfileDao;
 
 public class ProfileServlet extends HttpServlet  {
@@ -15,7 +16,8 @@ public class ProfileServlet extends HttpServlet  {
 		
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		if(ProfileDao.getProfile(username, password) != null) {
+		Profile profile = ProfileDao.getProfile(username, password);
+		if(profile != null) {
 			resp.sendRedirect("profile.html");
 		} else {
 			resp.sendRedirect("login.html");
