@@ -38,7 +38,7 @@ footer {
 
 /* Change the color of links on hover */
 .navbar a:hover {
-    background-color: #ddd;
+    background-color: red;
     color: black;
 }
 
@@ -53,7 +53,7 @@ footer {
     outline: none;
     color: yellow;
     padding: 14px 16px;
-    background-color: inherit;
+    background-color: black;
     font-family: inherit;
     margin: 0;
 }
@@ -82,7 +82,7 @@ footer {
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: red;
 }
 
 .dropdown:hover .dropdown-content {

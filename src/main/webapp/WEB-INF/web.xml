@@ -30,4 +30,13 @@
   		<url-pattern>/sendLoginInfo</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  		<servlet-name>sendNewProfileInfo</servlet-name>
+  		<servlet-class>com.revature.servlets.NewProfileServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  		<servlet-name>sendNewProfileInfo</servlet-name>
+  		<url-pattern>/sendNewProfileInfo</url-pattern>
+  </servlet-mapping>
 </web-app>

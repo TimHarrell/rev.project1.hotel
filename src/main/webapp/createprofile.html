@@ -10,7 +10,7 @@
     </head>
     <body>
         <Header>
-			<h1>Login Page</h1>
+			<h1>Create Profile Page</h1>
         </Header>
 		
 		<div class="navbar">
@@ -18,27 +18,39 @@
 			<div class="dropdown">
 				<button class="dropbtn">Account</button>
 		    	<div class="dropdown-content">
-		    		<a href="createprofile.html">Create Profile</a>
+		    		<a href="#">Create Account</a>
 		     		<a href="login.html">Login</a>
 				</div>
 			</div>
 			<a href="roominfo.html">Room Info</a>
 			<a href="about.html">About</a>
 		</div>
-		<div align="center">
-	        <form action="sendLoginInfo" method="post">
-	        	username:
+		<div id="createprofile" align="center">
+	        <form action="sendNewProfileInfo" method="post">
+	        	user name:
 	        	<br>
-	        	<input  type="text" name="username">
+	        	<input type="text" name="username">
+	        	<br>
+	        	first name:
+	        	<br>
+	        	<input type="text" name="firstname">
+	        	<br>
+	        	last name:
+	        	<br>
+	        	<input type="text" name="lastname">
 	        	<br>
 	        	password:
 	        	<br>
 	        	<input type="password" name="password">
+	        	<br>
+	        	check password:
+	        	<br>
+	        	<input type="password" name="passwordcheck">
 	        	<br>
 	        	<input type="submit" value="login">
 	        </form>
         </div>
     </body>
     <script src="js/account.js"></script>
-	<script src="js/login.js"></script>
+	<script src="js/createprofile.js"></script>
 </html>

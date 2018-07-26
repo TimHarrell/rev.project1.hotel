@@ -71,12 +71,12 @@ public class ProfileDao {
 	 * needs works
 	 * REMEMBER TO ADD STUFF FOR INVALIDCHARACTERS, make the escape character invalid
 	 */
-	public static Boolean makeProfile(String userId, String firstname, String lastname, String password) {
+	public static Profile makeProfile(String userId, String firstname, String lastname, String password) {
 		CallableStatement cs = null;
-		boolean success = false;
 		System.out.println("connecting...");
+		Profile newProfile; 
 		try(Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "INSERT INTO PROFILES (userID, firstname, lastname, passwrd) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO PROFILES (userID, firstname, lastname, pssword) VALUES (?, ?, ?, ?)";
 			cs = conn.prepareCall(sql);
 			cs.setString(1, userId);
 			cs.setString(2, firstname);
@@ -85,22 +85,22 @@ public class ProfileDao {
 			
 			Boolean result = cs.execute();
 			if (!result) {
-				System.out.println("Successful account submission.");
-				success = true;
+				System.out.println("Successful profile submission.");
+				newProfile = new Profile(userId, firstname, lastname, password);
 			} else {
 				System.out.println("Failed");
-				success = false;
+				newProfile = null;
 			}
 			
 			cs.close();
 		} catch(SQLIntegrityConstraintViolationException ex) {
 			System.out.println("That username already exists.");
-			success = false;
+			return null;
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			success = false;
+			return null;
 		}
 		
-		return success;
+		return newProfile;
 	}
 }
