@@ -7,13 +7,20 @@
             <meta name="viewport" content="width=device-width">
             <link type="text/css" rel="stylesheet" href="css/style.css">
 			<link type="text/css" rel="stylesheet" href="css/dropmenu.css">
+    		<link type="text/css" rel="stylesheet" href="css/navbar.css">
     </head>
     <body>
         <Header>
-			<div id="welcome">
-				<h1>Welcome to the Overlook Hotel</h1>
-			</div>
+		<div class="navbar">
+			<a href="index.html">Home</a>
+			<a href="login.html">Login</a>
+		</div>
         </Header>
+        
+        <form action="test" method="get">
+			<input type="submit" value ="test"/>
+		</form>
+		
         <form action="sendLoginInfo" method="post">
         	<label>username: </label>
         	<input type="text" name="username">
