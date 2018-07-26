@@ -15,6 +15,7 @@ public class ProfileDao {
 	
 	/*
 	 * needs work
+	 * it grabs an account from the database, only checking if it exists
 	 */
 	public static Profile getProfile(String userId, String passwrd) {
 		System.out.println("connecting...");
@@ -44,5 +45,14 @@ public class ProfileDao {
 		}
 		
 		return profile;
+	}
+	
+	/*
+	 * needs works
+	 * checks to see if the userId and the provided password are a match,
+	 * otherwise it will return false
+	 */
+	public static Boolean validateProfileLogin(String userId, String password) {
+		
 	}
 }
