@@ -7,5 +7,5 @@ indexportal.onclick = function () {
 var profileportal = document.getElementById("movetoprofile");
 
 profileportal.onclick = function () {
-	location.href='profile.html'
+	/*location.href='profile.html' */
 }
