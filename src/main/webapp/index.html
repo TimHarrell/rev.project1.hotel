@@ -10,23 +10,24 @@
 	</head>
 	<body>
 		<Header>
-			<h1>Welcome to Overlook Hotel</h1>
+			<h1 id="pagetitle">Welcome to Overlook Hotel</h1>
 		</Header>
 		
 		<div class="navbar">
-			<a href="index.html">Home</a>
-			<div class="dropdown">
-				<button class="dropbtn">Account</button>
-		    	<div class="dropdown-content">
-		    		<a href="createprofile.html">Create Account</a>
-		     		<a href="login.html">Login</a>
-				</div>
-			</div>
-			<a href="roominfo.html">Room Info</a>
-			<a href="about.html">About</a>
+			<button type="button" onclick="getHome()" id="home" class="navbarbutton">Home</button>
+			<button id="account"class="navbarbutton">Account</button>
+			<button type="button" onclick="getInfo()" id="roomInfo" class="navbarbutton">Room Info</button>
+			<button type="button" onclick="getAbout()" id="about" class="navbarbutton">About</button>
 		</div>
-	</body>
+        
+        <div>
+        	<p id="loginbody">change me</p>
+        	<img id ="image" src="imgs/the-shining_1280x720.jpg">
+        </div>
+    </body>
 	
 	<script src="js/index.js"></script>
+	<script src="js/account.js"></script>
+	<script src="js/login.js"></script>
 </html>
 

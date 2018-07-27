@@ -4,9 +4,32 @@
 		
 	</head>
 	<body>
-		<div id="movetologin">
-			<input type="button" value="logout">
+		<header>Profile Page</header>
+			<div class="navbar">
+			<a href="index.html">Home</a>
+			<div class="dropdown">
+				<button class="dropbtn">Account</button>
+		    	<div class="dropdown-content">
+		    		<a href="createprofile.html">Create Profile</a>
+		     		<a href="login.html">Login</a>
+				</div>
+			</div>
+			<a href="roominfo.html">Room Info</a>
+			<a href="about.html">About</a>
 		</div>
+		<div align="center">
+	        <form action="sendLoginInfo" method="post">
+	        	username:
+	        	<br>
+	        	<input  type="text" name="username">
+	        	<br>
+	        	password:
+	        	<br>
+	        	<input type="password" name="password">
+	        	<br>
+	        	<input type="submit" value="login">
+	        </form>
+        </div>
 	</body>
 	<script src="js/profile.js"></script>
 </html>

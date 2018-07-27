@@ -15,29 +15,20 @@
         </Header>
 		
 		<div class="navbar">
-			<a href="index.html">Home</a>
+			<button type="button" onclick="getRoomInfo()" id="home" class="navbarbutton">Home</button>
 			<div class="dropdown">
-				<button class="dropbtn">Account</button>
+				<button id="account"class="navbarbutton">Account</button>
 		    	<div class="dropdown-content">
 		    		<a href="createprofile.html">Create Profile</a>
 		     		<a href="login.html">Login</a>
 				</div>
 			</div>
-			<a href="roominfo.html">Room Info</a>
-			<a href="about.html">About</a>
+			<button type="button" onclick="getRoomInfo()" id="roomInfo" class="navbarbutton">Room Info</button>
+			<button type="button" onclick="getRoomInfo()" id="about" class="navbarbutton">About</button>
 		</div>
-		<div align="center">
-	        <form action="sendLoginInfo" method="post">
-	        	username:
-	        	<br>
-	        	<input  type="text" name="username">
-	        	<br>
-	        	password:
-	        	<br>
-	        	<input type="password" name="password">
-	        	<br>
-	        	<input type="submit" value="login">
-	        </form>
+        
+        <div>
+        	<p id="loginbody">change me</p>
         </div>
     </body>
     <script src="js/account.js"></script>
