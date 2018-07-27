@@ -22,10 +22,15 @@ public class ProfileServlet extends HttpServlet  {
 		String password = req.getParameter("password");
 		Profile profile = ProfileDao.getProfile(username, password);
 		if(profile != null) {
-			resp.sendRedirect("profile.html");
-		} else {
+			if(profile.isHost()) {
+				resp.sendRedirect("host.html");
+			} 
+			else {
+				resp.sendRedirect("profile.html");
+			}
+		}
+		else {
 			resp.sendRedirect("login.html");
 		}
 	}
-	
 }

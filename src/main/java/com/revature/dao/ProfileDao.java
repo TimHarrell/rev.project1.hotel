@@ -39,6 +39,14 @@ public class ProfileDao {
 				String storedFirstname = rs.getString("firstname");
 				String storedLastname = rs.getString("lastname");
 				String storedPassword = rs.getString("pssword");
+				Boolean storedHost;
+				if(rs.getInt("hst") == 1) {
+					storedHost = true;
+				}
+				else {
+					storedHost = false;
+				}
+				
 			
 			rs.close();
 			ps.close();
@@ -48,7 +56,7 @@ public class ProfileDao {
 				throw new InvalidLoginCredentials();
 			}
 			
-			profile = new Profile(storedUserId, storedFirstname, storedLastname, storedPassword);
+			profile = new Profile(storedUserId, storedFirstname, storedLastname, storedPassword, storedHost);
 				
 		} catch (InvalidLoginCredentials e) {
 			

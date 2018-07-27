@@ -5,6 +5,7 @@ public class Profile {
 	private String firstName;
 	private String lastName;
 	private transient String password;
+	private Boolean host;
 	
 	public Profile(String userId, String firstName, String lastName, String password) {
 		super();
@@ -12,7 +13,18 @@ public class Profile {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
+		this.host = false;
 	}
+	
+	public Profile(String userId, String firstName, String lastName, String password, Boolean host) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.host = host;
+	}
+	
 
 	public String getUserId() {
 		return userId;
@@ -44,6 +56,14 @@ public class Profile {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public Boolean isHost() {
+		return host;
+	}
+	
+	public void setHost(Boolean host) {
+		this.host = host;
 	}
 	
 	

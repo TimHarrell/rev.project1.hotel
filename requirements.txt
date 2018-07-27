@@ -1,58 +1,46 @@
-Message Board (MB)
+Hotel Reservation System (HRS)
 
+-A Guest can login
 
+-A Guest can view their dashboard
 
--A User can login
+-A Guest can logout
 
--A User can view their dashboard
+-A Guest can view available hotel rooms
 
--A User can logout
+-A Guest can submit a reservation for a hotel room
 
--A User can view all topics
+-A Guest can review the status for each reservation
 
--A User can view all replies to a topic
+-A Guest can raise an issue with the Host
 
--A User can post a topic
+-A Guest can view their replies
 
--A User can reply to a topic
+-A Guest can view their profile
 
--A User can upload an image to their post or reply
+-A Guest can update their profile
 
--A User can flag a post
+-A Host can login
 
--A User can view their replies
+-A Host can view their dashboard
 
--A User can view their profile
+-A Host can logout
 
--A User can update their profile
+-A Host can approve or deny a reservation
 
+-A Host can upload an image of the hotel room
 
+-A Host can view/resolve issues from Guests
 
--An Administrator can login
+-A Host can view all rooms
 
--An Administrator can view their dashboard
-
--An Administrator can logout
-
--An Administrator can view flagged posts
-
--An Administrator can edit or delete flagged posts
-
--An Administrator can view all topics
-
--An Administrator can view all Users
-
-
+-A Host can view all Guests
 
 ------------------------------------------------------------------
 
--An Administrator can register a User, which sends the User an email with their Username and temp password (optional)
+-A Host can register a Guest, which sends the Guest an email with their Guestname and temp password (optional)
 
--A User can reset their password (optional)
-
-
-
-
+-A Guest can reset their password (optional)
 
 Technologies:
 
@@ -67,10 +55,6 @@ Technologies:
 -Javascript/AJAX
 
 -JUnit
-
-
-
-
 
 Environment:
 
