@@ -9,3 +9,6 @@ var profileportal = document.getElementById("movetoprofile");
 profileportal.onclick = function () {
 	/*location.href='profile.html' */
 }
+
+var username = prompt("Enter username");
+

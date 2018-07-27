@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,9 +15,11 @@ public class ProfileServlet extends HttpServlet  {
 	
 	/*
 	 * handles login attempts
+	 * prevent going to a profile page if a profile is invalid
 	*/
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
