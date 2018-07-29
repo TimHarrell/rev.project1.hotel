@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.revature.beans.Profile;
 import com.revature.dao.ProfileDao;
@@ -49,16 +50,15 @@ public class ProfileServlet extends HttpServlet  {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		Profile profile = ProfileDao.getProfile(username, password);
-		
-		if(profile == null) {
-			RequestDispatcher rd = req.getRequestDispatcher("login");
+		HttpSession session = req.getSession();
+		session.setAttribute("profile", profile);
+		if(session.getAttribute("profile")== null) {
 			resp.setContentType("text/HTML");
-			resp.getWriter().write("<h1>invalid login</h1>");
-			rd.include(req, resp);
+			resp.getWriter().write(buildLoginHTML(""));
+			
 		}
 		else {
-			RequestDispatcher rd = req.getRequestDispatcher("profile.html");
-			rd.forward(req, resp);
+			resp.sendRedirect("ProfileConnected");
 		}
 		
 	}
@@ -67,12 +67,10 @@ public class ProfileServlet extends HttpServlet  {
 		StringBuilder html = new StringBuilder();
 		html.append( 
 				"<html>\r\n" + 
-				"    <head>\r\n" + 
-				"            <title>Overlook Hotel</title>\r\n" + 
-				"            <meta name=\"author\" content=\"tim\">\r\n" + 
-				"            <meta name=\"keywords\" content=\"hotel\">\r\n" + 
+				"    <head>\r\n" +
 				"            <meta name=\"viewport\" content=\"width=device-width\">\r\n" + 
 				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/style.css\">\r\n" + 
+				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/login.css\">\r\n" + 
 				"			\r\n" + 
 				"    </head>\r\n" + 
 				"    <body>\r\n" + 
@@ -100,8 +98,11 @@ public class ProfileServlet extends HttpServlet  {
 				"		        	<br>\r\n" + 
 				"		        	<input type=\"submit\" value=\"login\" onclick=\"getLoginInfo\">\r\n" + 
 				"		        </form>\r\n" + 
-				"       		 </div>\r\n" + 
-				"       		 <p id=\"b\">sign in</p>\r\n" + 
+				"       		 </div>\r\n");
+		
+		html.append("<div text-align:'center'><a href='createprofile.html' >Invalid login. create account?</a></div>\r\n"
+				);
+		html.append( 
 				"        </div>\r\n" + 
 				"    </body>\r\n" + 
 				"	<script src=\"js/login.js\"></script>\r\n" + 
@@ -109,4 +110,6 @@ public class ProfileServlet extends HttpServlet  {
 		
 		return html.toString();
 	}
+	
+	
 }

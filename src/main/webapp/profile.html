@@ -10,21 +10,25 @@
             <meta name="viewport" content="width=device-width">
             <link type="text/css" rel="stylesheet" href="css/style.css">
 	</head>
-	<body>
+	<body onload="form.action='ProfileConnected'">
 		<Header>
+		
 			<div class="navbar">
-				<button type="button" onclick="logout()" id="logout" class="navbarbutton">Logout</button>
-				<button type="button" onclick="reservations()" id="reservations" class="navbarbutton">Reservations</button>
-				<button type="button" onclick="hostspeak()" id="hostspeak" class="navbarbutton">Inquiry</button>
-				<button type="button" onclick="profileinfo()" id="profile" class="navbarbutton">Profile</button>
+				<form action="ProfileServlet">
+				<button type="submit"  id="logout" class="navbarbutton" name="input" value="logout">Logout</button>
+				<button type="submit"  id="dashboard" class="navbarbutton" name="input" value="dashboard">Dash board</button>
+				<button type="submit"  id="reservations" class="navbarbutton" name="input" value="reservations">Reservations</button>
+				<button type="submit"  id="hostspeak" class="navbarbutton" name="input" value="inqiry">Inquiry</button>
+				<button type="submit"  id="profile" class="navbarbutton" name="input" value="profile">Profile</button>
+				</form>
 			</div>
 		</Header>
-		
-		
 		<div>
-			<h1 id="pagetitle">Welcome to Overlook Hotel</h1>
-			<p id="b">change me</p>
-			<img id ="image" src="imgs/the-shining_1280x720.jpg">
+		
+		
+			<!-- changes go here -->
+       	
+       	
        	</div>
 	</body>
 	<script src="js/profile.js"></script>

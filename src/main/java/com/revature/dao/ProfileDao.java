@@ -55,9 +55,8 @@ public class ProfileDao {
 				System.out.println("invalid password");
 				throw new InvalidLoginCredentials();
 			}
-			
 			profile = new Profile(storedUserId, storedFirstname, storedLastname, storedPassword, storedHost);
-				
+			System.out.println("profile exists");
 		} catch (InvalidLoginCredentials e) {
 			
 			return null;

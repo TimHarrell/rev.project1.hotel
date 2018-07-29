@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginFilter implements Filter{
 	//called whenever a request/response pair is passed through the chain when a client requests for a resource at the end of a chain
@@ -21,6 +22,7 @@ public class LoginFilter implements Filter{
 		@Override
 		public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 				throws IOException, ServletException {
+			//Session session = request.getSession();
 			String myParam = request.getParameter("myParam");
 			
 			if(!"blockRequest".equals(myParam)) {
