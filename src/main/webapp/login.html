@@ -11,26 +11,31 @@
     <body>
     	
         <Header>
-			<h1>Login Page</h1>
-        </Header>
-		
-		<div class="navbar">
-			<button type="button" onclick="getRoomInfo()" id="home" class="navbarbutton">Home</button>
-			<div class="dropdown">
-				<button id="account"class="navbarbutton">Account</button>
-		    	<div class="dropdown-content">
-		    		<a href="createprofile.html">Create Profile</a>
-		     		<a href="login.html">Login</a>
-				</div>
-			</div>
-			<button type="button" onclick="getRoomInfo()" id="roomInfo" class="navbarbutton">Room Info</button>
-			<button type="button" onclick="getRoomInfo()" id="about" class="navbarbutton">About</button>
+        <div class="navbar">
+			<button type="button" onclick="getHome()" id="home" class="navbarbutton">Home</button>
+			<button type="button" onclick="goToAccount()" class="navbarbutton">Account</button>
 		</div>
+			
+        </Header>
         
         <div>
+        	<h1 id="pagetitle">Login Page</h1>
         	<p id="loginbody">change me</p>
+        	<div align="center">
+		        <form action="login" method="post">
+		        	username:
+		        	<br>
+		        	<input  type="text" name="username">
+		        	<br>
+		        	password:
+		        	<br>
+		        	<input type="password" name="password">
+		        	<br>
+		        	<input type="submit" value="login" onclick="getLoginInfo">
+		        </form>
+       		 </div>
+       		 <p id="b">sign in</p>
         </div>
     </body>
-    <script src="js/account.js"></script>
 	<script src="js/login.js"></script>
 </html>

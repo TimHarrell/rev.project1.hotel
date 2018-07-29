@@ -2,34 +2,30 @@
 <html>
 	<head>
 		
+		<head>
+		<meta charset="ISO-8859-1">
+		 <title>Overlook Hotel</title>
+            <meta name="author" content="tim">
+            <meta name="keywords" content="hotel">
+            <meta name="viewport" content="width=device-width">
+            <link type="text/css" rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<header>Profile Page</header>
+		<Header>
 			<div class="navbar">
-			<a href="index.html">Home</a>
-			<div class="dropdown">
-				<button class="dropbtn">Account</button>
-		    	<div class="dropdown-content">
-		    		<a href="createprofile.html">Create Profile</a>
-		     		<a href="login.html">Login</a>
-				</div>
+				<button type="button" onclick="logout()" id="logout" class="navbarbutton">Logout</button>
+				<button type="button" onclick="reservations()" id="reservations" class="navbarbutton">Reservations</button>
+				<button type="button" onclick="hostspeak()" id="hostspeak" class="navbarbutton">Inquiry</button>
+				<button type="button" onclick="profileinfo()" id="profile" class="navbarbutton">Profile</button>
 			</div>
-			<a href="roominfo.html">Room Info</a>
-			<a href="about.html">About</a>
-		</div>
-		<div align="center">
-	        <form action="sendLoginInfo" method="post">
-	        	username:
-	        	<br>
-	        	<input  type="text" name="username">
-	        	<br>
-	        	password:
-	        	<br>
-	        	<input type="password" name="password">
-	        	<br>
-	        	<input type="submit" value="login">
-	        </form>
-        </div>
+		</Header>
+		
+		
+		<div>
+			<h1 id="pagetitle">Welcome to Overlook Hotel</h1>
+			<p id="b">change me</p>
+			<img id ="image" src="imgs/the-shining_1280x720.jpg">
+       	</div>
 	</body>
 	<script src="js/profile.js"></script>
 </html>

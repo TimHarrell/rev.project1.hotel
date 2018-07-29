@@ -13,6 +13,8 @@ import com.revature.beans.Profile;
 import com.revature.dao.ProfileDao;
 
 public class NewProfileServlet extends HttpServlet {
+	
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
 		String username = req.getParameter("username");

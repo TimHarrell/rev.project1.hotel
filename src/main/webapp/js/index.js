@@ -1,36 +1,25 @@
-var loginportal = document.getElementById("movetologin");
-
-loginportal.onclick = function () {
-	location.href='login.html';
-}
-
-var indexportal = document.getElementById("movetoindex");
-
-indexportal.onclick = function () {
-	location.href='index.html';
-}
-
-var profileportal = document.getElementById("movetoprofile");
-
-profileportal.onclick = function () {
-	/*location.href='profile.html' */
-}
-
-
-function getInfo() {
-	changeInner("titles/roominfo.txt", "pagetitle");
-	changeInner("hello.txt", "loginbody");
-	changeimg("image.txt", "image");
-}
 
 function getHome() {
-	changeInner("titles/home.txt", "pagetitle");
+	
+	changeInner("text/titles/home.txt", "pagetitle");
+	changeInner("text/hello.txt", "loginbody");
+}
+
+function getInfo() {
+	
+	changeInner("text/titles/roominfo.txt", "pagetitle");
 	changeInner("hello.txt", "loginbody");
+	changesrc("text/src/image.txt", "image");
 }
 
 function getAbout() {
-	changeInner("titles/about.txt", "pagetitle");
-	changeInner("hello.txt", "loginbody");
+	
+	changeInner("text/titles/about.txt", "pagetitle");
+	changeInner("text/hello.txt", "loginbody");
+}
+
+function goToAccount() {
+	location.href = "login.html";
 }
 
 function changeInner(file, id) {
@@ -47,7 +36,7 @@ function changeInner(file, id) {
 
 
 
-function changeimg(file, id) {
+function changesrc(file, id) {
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if(this.readyState == 4 && this.status == 200) {
