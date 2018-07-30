@@ -1,20 +1,39 @@
 DROP TABLE PROFILES;
+DROP TABLE RESERVATIONS;
+DROP TABLE ROOMS;
+DROP TABLE PENDING_RESERVATIONS;
+DROP TABLE INQUIRIES;
+CREATE USER admin_jack IDENTIFIED BY revature;
+GRANT CONNECT, RESOURCE, DBA TO admin_jack;
+GRANT CREATE SESSION GRANT ANY PRIVILEGE TO admin_jack;
+GRANT UNLIMITED TABLESPACE TO admin_jack;
+GRANT
+  SELECT,
+  INSERT,
+  UPDATE,
+  DELETE
+ON
+  schema.PROFILES;
+TO
+  admin_jack;
 
+--DDL stements
 CREATE TABLE PROFILES (
     userId VARCHAR2(20),
     firstname VARCHAR2(15),
     lastname VARCHAR2(20),
     pssword VARCHAR2(15),
     hst INTEGER CHECK(hst BETWEEN 0 AND 1),
-    CONSTRAINT PK_Profile PRIMARY KEY (userId)
+    CONSTRAINT PK_userIdPro PRIMARY KEY (userId)
 );
 
 CREATE TABLE RESERVATIONS (
     reservationDate DATE,
     userId VARCHAR(20),
     roomNumber INTEGER,
-    CONSTRAINT FK_userId FOREIGN KEY (userId) REFERENCES PROFILS(userId)
+    CONSTRAINT FK_userIdRes FOREIGN KEY (userId) REFERENCES PROFILES(userId)
 );
+
 CREATE TABLE ROOMS (
     roomNumber INTEGER,
     numBeds INTEGER CHECK(numBeds BETWEEN 1 AND 2),
@@ -26,12 +45,20 @@ CREATE TABLE PENDING_RESERVATIONS (
     userId VARCHAR(20),
     reservationDate DATE,
     roomNumber INTEGER,
-    CONSTRAINT PK_transactionNumber PRIMARY KEY (transaction_number),
-    CONSTRAINT FK_userId FOREIGN KEY(userId) REFERENCES PROFILES(userId)
-)
+    CONSTRAINT PK_transactionNumber PRIMARY KEY (transactionNumber),
+    CONSTRAINT FK_userIdPen FOREIGN KEY(userId) REFERENCES PROFILES(userId)
+);
+
+CREATE TABLE INQUIRIES (
+    inqId INTEGER,
+    active INTEGER,
+    userId VARCHAR2(20),
+    topic VARCHAR2(20),
+    CONSTRAINT PK_idInq PRIMARY KEY (inqId)
+);
 
 CREATE SEQUENCE seq_transactionNumber MINVALUE 1 START WITH 1 INCREMENT BY 1;
-
+CREATE SEQUENCE seq_inquiries
 CREATE OR REPLACE TRIGGER transaction_on_insert
   BEFORE INSERT ON PENDING_RESERVATIONS
   FOR EACH ROW
@@ -41,7 +68,12 @@ BEGIN
   FROM dual;
 END;
 
+--DML statements
 INSERT INTO PROFILES (userId, firstname, lastname, pssword, hst) VALUES ('JackTorrance', 'Jack', 'Torrance', 'overlook', 1);
+INSERT INTO RESERVATIONS (reservationDate, userId, roomNumber) VALUES (TO_DATE('2018-08-30','YYYY-MM-DD'), (SELECT userId FROM PROFILES WHERE userId='JackTorrance'), 3); 
+SELECT * FROM RESERVATIONS;
 SELECT * FROM PROFILES;
+SELECT COUNT(*) FROM PROFILES;
+SELECT * FROM INQUERIES;
 
 COMMIT;
