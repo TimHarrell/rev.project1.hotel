@@ -3,11 +3,14 @@ package com.revature.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.revature.beans.Profile;
 
 /**
  * Servlet implementation class ProfileConnected
@@ -23,42 +26,47 @@ public class ProfileConnectedServlet extends HttpServlet {
 			resp.sendRedirect("login.html");
 		}
 		else {
+			Profile currUser = (Profile) session.getAttribute("profile");
+			
 			if(input == null) {
-				PrintWriter pw = resp.getWriter();
-				pw.println(makeProfileHtml(""));
-				pw.close();
+				resp.sendRedirect("profile.html");
 				System.out.println("no input");
 			}
 			else if(input.equals("logout")) {
 				resp.sendRedirect("LogoutServlet");
 			}
 			else if(input.equals("dashboard")) {
-				PrintWriter pw = resp.getWriter();
-				pw.println(makeProfileHtml(""));
-				pw.close();
+				
 			}
 			else if(input.equals("reservations")) {
-				PrintWriter pw = resp.getWriter();
-				pw.println(makeProfileHtml(""));
-				pw.close();
+				
 			}
-			else if(input.equals("inquiry")) {
-				PrintWriter pw = resp.getWriter();
-				pw.println(makeProfileHtml(""));
-				pw.close();
+			else if(input.equals("inquiry")) { // Inquiry selected
+				if(currUser.isHost()) {
+					//resp.sendRedirect("hostInquiry.html");
+					resp.setContentType("text/HTML");
+					resp.getWriter().write(HtmlBuilder.hostInquiry());
+				}
+				else {
+					resp.sendRedirect("guestInquiry.html");
+				}
+			}
+			else if(input.equals("makeInquiry")) { // inquiry sub select make
+				
+			}
+			else if(input.equals("viewInquiry")) { // inquiry sub select view
+				
 			}
 			else if(input.equals("profile")) {
-				PrintWriter pw = resp.getWriter();
-				pw.println(makeProfileHtml(""));
-				pw.close();
 			}
+			
 			else {
 				System.out.println("sopmething went wrong with seleection in ProfileConnection Servlet");
 			}
 		}
 	}
 
-	private String makeProfileHtml(String addition) {
+	private String makeProfileHtml(String buttons, String title, String mainPage) {
 		StringBuilder html = new StringBuilder();
 		html.append( 
 				"<html>\r\n" + 
@@ -80,16 +88,25 @@ public class ProfileConnectedServlet extends HttpServlet {
 				"				<button type=\"submit\"  id=\"dashboard\" class=\"navbarbutton\" name=\"input\" value=\"dashboard\">Dash board</button>\r\n" + 
 				"				<button type=\"submit\"  id=\"reservations\" class=\"navbarbutton\" name=\"input\" value=\"reservations\">Reservations</button>\r\n" + 
 				"				<button type=\"submit\"  id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inquiry\">Inquiry</button>\r\n" + 
-				"				<button type=\"submit\"  id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>" +
+				"				<button type=\"submit\"  id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>");
+				
+				html.append(buttons);
+				
+				html.append(
 				"				</form>" +
 				"			</div>\r\n" + 
 				"		</Header>\r\n" + 
 				"		\r\n" + 
 				"		\r\n" +
-				"		<div>\r\n"
+				"		<div>\r\n" +
+				"	<h1 id='pagetitle'>" +
+				title +
+				"</h1>"
 				); 
 		
-				html.append(addition);
+				html.append(title);
+				
+				html.append(mainPage);
 				
 				html.append(
 				"       	</div>\r\n" + 
@@ -99,5 +116,27 @@ public class ProfileConnectedServlet extends HttpServlet {
 				
 				);
 		return html.toString();
+	}
+	
+	private String makeInquiryGuestHtml() {
+		// buttons
+		StringBuilder buttons = new StringBuilder();
+		
+		// main page
+		StringBuilder mainPage = new StringBuilder();
+		return makeProfileHtml(buttons.toString(), "Inquires", mainPage.toString());
+	}
+	
+	private String makeInquiryGuestMakeHtml() {
+		// buttons
+		StringBuilder buttons = new StringBuilder();
+		
+		// main page
+		StringBuilder mainPage = new StringBuilder();
+		return makeProfileHtml(buttons.toString(), "Inqueries: make", mainPage.toString());
+	}
+	
+	private String makeInquiryHostHtml() {
+		return null;
 	}
 }

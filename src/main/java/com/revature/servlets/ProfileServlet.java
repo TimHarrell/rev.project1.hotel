@@ -29,12 +29,6 @@ public class ProfileServlet extends HttpServlet  {
 		}
 		else {
 			RequestDispatcher rd = req.getRequestDispatcher("profile.html");
-			/*PrintWriter pw = resp.getWriter();
-			pw.println("<h1>hi</h1>");
-			pw.println("<script alert('hi')></script>");
-			pw.close();
-			*/
-			
 			rd.forward(req, resp);
 		}
 		
@@ -46,7 +40,6 @@ public class ProfileServlet extends HttpServlet  {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		Profile profile = ProfileDao.getProfile(username, password);
@@ -55,7 +48,6 @@ public class ProfileServlet extends HttpServlet  {
 		if(session.getAttribute("profile")== null) {
 			resp.setContentType("text/HTML");
 			resp.getWriter().write(buildLoginHTML(""));
-			
 		}
 		else {
 			resp.sendRedirect("ProfileConnected");

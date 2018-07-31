@@ -1,19 +1,14 @@
 package com.revature.servlets;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
-public class InquiryServlet extends HttpServlet {
-	
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) {
-		
-	}
-	
-	private String makeInquiryHtml(String addition) {
-		StringBuilder html = new StringBuilder();
-		
-		html.append( 
+import com.revature.beans.Inquiry;
+import com.revature.dao.InquiryDao;
+
+public class HtmlBuilder {
+	public static String hostInquiry() {
+		StringBuilder page = new StringBuilder();
+		page.append("<!DOCTYPE html>\r\n" + 
 				"<html>\r\n" + 
 				"	<head>\r\n" + 
 				"		\r\n" + 
@@ -27,30 +22,34 @@ public class InquiryServlet extends HttpServlet {
 				"	</head>\r\n" + 
 				"	<body>\r\n" + 
 				"		<Header>\r\n" + 
-				"			<div class=\"navbar\">\r\n" +  
-				"				<form action=\"ProfileConnected\">\r\n" + 
+				"		\r\n" + 
+				"			<div class=\"navbar\">\r\n" + 
+				"				<form action=\"ProfileServlet\">\r\n" + 
 				"				<button type=\"submit\"  id=\"logout\" class=\"navbarbutton\" name=\"input\" value=\"logout\">Logout</button>\r\n" + 
 				"				<button type=\"submit\"  id=\"dashboard\" class=\"navbarbutton\" name=\"input\" value=\"dashboard\">Dash board</button>\r\n" + 
 				"				<button type=\"submit\"  id=\"reservations\" class=\"navbarbutton\" name=\"input\" value=\"reservations\">Reservations</button>\r\n" + 
-				"				<button type=\"submit\"  id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inquiry\">Inquiry</button>\r\n" + 
-				"				<button type=\"submit\"  id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>" +
-				"				</form>" +
+				"				<button type=\"submit\"  id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inqiry\">Inquiry</button>\r\n" + 
+				"				<button type=\"submit\"  id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>\r\n" + 
+				"				</form>\r\n" + 
 				"			</div>\r\n" + 
 				"		</Header>\r\n" + 
-				"		\r\n" + 
-				"		\r\n" +
-				"		<div>\r\n"
-				); 
+				"		<div>\r\n");
+				StringBuilder inqs = new StringBuilder();
+				ArrayList<Inquiry> list = InquiryDao.getActiveInquiries();
 				
-				
-				html.append(
+				for(Inquiry inq : list) {
+					inqs.append("<a>"
+							+ inq.getId()
+							+ "</a>");
+				}
+				page.append(inqs.toString());
+				page.append(
+				"			<h1 id=\"pagetitle\">Inquiries</h1>\r\n" + 
+				"       		</div>\r\n" + 
 				"       	</div>\r\n" + 
 				"	</body>\r\n" + 
 				"	<script src=\"js/profile.js\"></script>\r\n" + 
-				"</html>"
-				
-				);
-		
-		return html.toString();
+				"</html>");
+				return page.toString();
 	}
 }

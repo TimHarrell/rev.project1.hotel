@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Inquiry {
 	private String topic;
-	private ArrayList<String> convo; // stored in another table with name id
+	private ArrayList<Message> convo; // stored in another table with name id
 	private String userId;
 	private long id;
 	private Boolean active;
@@ -17,10 +17,10 @@ public class Inquiry {
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
-	public ArrayList<String> getConvo() {
+	public ArrayList<Message> getConvo() {
 		return convo;
 	}
-	public void setConvo(ArrayList<String> convo) {
+	public void setConvo(ArrayList<Message> convo) {
 		this.convo = convo;
 	}
 	public String getUserId() {
@@ -42,11 +42,18 @@ public class Inquiry {
 		this.active = active;
 	}
 	
+	public void setActive(int active) {
+		if(active == 1) {
+			this.active = true;
+		} 
+		else this.active = false;
+	}
+	
 	public Inquiry() {
 		super();
 	}
 	
-	public Inquiry(String topic, ArrayList<String> convo, String profile, long id, Boolean active) {
+	public Inquiry(String topic, ArrayList<Message> convo, String profile, long id, Boolean active) {
 		super();
 		this.topic = topic;
 		this.convo = convo;
@@ -55,6 +62,16 @@ public class Inquiry {
 		this.active = active;
 	}
 	
-	
+	public Inquiry(String topic, ArrayList<Message> convo, String profile, long id, int active) {
+		super();
+		this.topic = topic;
+		this.convo = convo;
+		this.userId = profile;
+		this.id = id;
+		if(active == 1) {
+			this.active = true;
+		}
+		else this.active = false;
+	}
 	
 }

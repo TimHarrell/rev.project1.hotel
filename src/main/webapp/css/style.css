@@ -49,3 +49,24 @@ footer {
     text-decoration: none;
     font-size: 17px;
 }
+
+
+.subnavbarbutton {
+	float: right;
+	padding: 14px 16px;
+	background-color: black;
+	color: yellow;
+	border: none;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.subnavbarbutton:hover {
+	float: right;
+    background-color: red;
+    color: yellow;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}

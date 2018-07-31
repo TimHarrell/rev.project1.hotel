@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import org.junit.Test;
 
+import com.revature.dao.InquiryDao;
 import com.revature.util.ConnectionUtil;
 
 //import junit.framework.Test;
@@ -19,5 +20,28 @@ public class AppTest extends TestCase {
 		} 
 		System.out.print("connected");
 		assertTrue(true);
+	}
+	
+	@Test
+	public void testGetInqId() {
+		if(3 == InquiryDao.getInqByParts(1,  "dummy", "dummy")) {
+			assertTrue(true);
+		}
+		else {
+			assertTrue(false);
+		}
+	}
+	
+	public void testMakeInquiry() {
+		try {
+			
+		}
+		catch(Exception e) {
+			assertTrue(false);
+		}
+		assertTrue(true);
+	}
+	public void testInsertAndGetInq() {
+		
 	}
 }
