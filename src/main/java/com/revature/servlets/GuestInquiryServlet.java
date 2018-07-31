@@ -29,7 +29,8 @@ public class GuestInquiryServlet extends HttpServlet {
 				System.out.println("no input");
 			}
 			else if(input.equals("makeInquiry")) {
-				
+				resp.setContentType("text/html");
+				resp.getWriter().write(makeInquiryHtml());
 			}
 			else if(input.equals("viewInquiry")) {
 				resp.setContentType("text/HTML");
@@ -45,7 +46,7 @@ public class GuestInquiryServlet extends HttpServlet {
 		}
 	}
 	
-	private String makeInquiryHtml(String addition) {
+	private static String makeInquiryHtml() {
 		StringBuilder html = new StringBuilder();
 		
 		html.append( 
@@ -70,7 +71,7 @@ public class GuestInquiryServlet extends HttpServlet {
 				"				<button type=\"submit\"  id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inquiry\">Inquiry</button>\r\n" + 
 				"				<button type=\"submit\"  id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>" +
 				"				</form>" +
-				"			<form action =\"GuestInquiry\" method='post'>\r\n" + 
+				"			<form class='navbar' action =\"GuestInquiry\" method='post'>\r\n" + 
 				"				<!-- more changes here --> \r\n" + 
 				"				<button type=\"submit\" class=\"subnavbarbutton\" name=\"input\" value=\"makeInquiry\">make</button>\r\n" + 
 				"       			<button type=\"submit\" class=\"subnavbarbutton\" name=\"input\" value=\"viewInquiry\">view</button>\r\n" + 
