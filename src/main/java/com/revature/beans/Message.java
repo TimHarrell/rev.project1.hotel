@@ -16,6 +16,10 @@ public class Message {
 	public void setSender(String sender) {
 		this.sender = sender;
 	}
+	
+	public Message() {
+		super();
+	}
 	public Message(String message, String sender) {
 		super();
 		this.message = message;

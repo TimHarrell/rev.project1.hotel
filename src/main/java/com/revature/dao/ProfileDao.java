@@ -79,18 +79,18 @@ public class ProfileDao {
 	 * REMEMBER TO ADD STUFF FOR INVALIDCHARACTERS, make the escape character invalid
 	 */
 	public static Profile makeProfile(String userId, String firstname, String lastname, String password) {
-		CallableStatement cs = null;
+		PreparedStatement ps = null;
 		System.out.println("connecting...");
 		Profile newProfile; 
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "INSERT INTO PROFILES (userID, firstname, lastname, pssword) VALUES (?, ?, ?, ?)";
-			cs = conn.prepareCall(sql);
-			cs.setString(1, userId);
-			cs.setString(2, firstname);
-			cs.setString(3, lastname);
-			cs.setString(4, password);
+			ps = conn.prepareCall(sql);
+			ps.setString(1, userId);
+			ps.setString(2, firstname);
+			ps.setString(3, lastname);
+			ps.setString(4, password);
 			
-			Boolean result = cs.execute();
+			Boolean result = ps.execute();
 			if (!result) {
 				System.out.println("Successful profile submission.");
 				newProfile = new Profile(userId, firstname, lastname, password);
@@ -99,7 +99,7 @@ public class ProfileDao {
 				newProfile = null;
 			}
 			
-			cs.close();
+			ps.close();
 		} catch(SQLIntegrityConstraintViolationException ex) {
 			System.out.println("That username already exists.");
 			return null;

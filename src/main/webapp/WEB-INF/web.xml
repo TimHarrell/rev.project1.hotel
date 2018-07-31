@@ -63,4 +63,14 @@
     <servlet-name>DashboardServlet</servlet-name>
     <url-pattern>/DashboardServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>GuestInquiry</servlet-name>
+  	<servlet-class>com.revature.servlets.GuestInquiryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>GuestInquiry</servlet-name>
+  	<url-pattern>/GuestInquiry</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

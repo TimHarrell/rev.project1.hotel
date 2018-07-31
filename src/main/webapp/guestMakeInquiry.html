@@ -21,16 +21,30 @@
 				<button type="submit"  id="hostspeak" class="navbarbutton" name="input" value="inqiry">Inquiry</button>
 				<button type="submit"  id="profile" class="navbarbutton" name="input" value="profile">Profile</button>
 				</form>
-				<form action ="GuestInquiry" method='post'>
+				<form action ="GuestInquiry">
 				<!-- more changes here --> 
 				<button type="submit" class="subnavbarbutton" name="input" value="makeInquiry">make</button>
        			<button type="submit" class="subnavbarbutton" name="input" value="viewInquiry">view</button>
 				</form>
 			</div>
 		</Header>
+		<h1 id="pagetitle">Inquiries</h1>
 		<div>
+			<div align='center'>
+				<form action='GuestInquiry' method='post'>
+					topic:
+					<br>
+					<input id='topic' type='text' name='topic'>
+					<br>
+					body:
+					<br>
+					<input id ='body' type='text' name ='body'>
+					<br>
+					<input type='submit' name='input' value='Submit Inquiry'>
+				</form>
+			</div>
 			<!-- changes go here -->
-			<h1 id="pagetitle">Inquiries</h1>
+			
        		</div>
        	</div>
 	</body>

@@ -24,7 +24,7 @@ public class HtmlBuilder {
 				"		<Header>\r\n" + 
 				"		\r\n" + 
 				"			<div class=\"navbar\">\r\n" + 
-				"				<form action=\"ProfileServlet\">\r\n" + 
+				"				<form action=\"ProfileConnected\">\r\n" + 
 				"				<button type=\"submit\"  id=\"logout\" class=\"navbarbutton\" name=\"input\" value=\"logout\">Logout</button>\r\n" + 
 				"				<button type=\"submit\"  id=\"dashboard\" class=\"navbarbutton\" name=\"input\" value=\"dashboard\">Dash board</button>\r\n" + 
 				"				<button type=\"submit\"  id=\"reservations\" class=\"navbarbutton\" name=\"input\" value=\"reservations\">Reservations</button>\r\n" + 
@@ -33,6 +33,7 @@ public class HtmlBuilder {
 				"				</form>\r\n" + 
 				"			</div>\r\n" + 
 				"		</Header>\r\n" + 
+				"			<h1 id=\"pagetitle\">Inquiries</h1>\r\n" + 
 				"		<div>\r\n");
 				StringBuilder inqs = new StringBuilder();
 				ArrayList<Inquiry> list = InquiryDao.getActiveInquiries();
@@ -44,7 +45,6 @@ public class HtmlBuilder {
 				}
 				page.append(inqs.toString());
 				page.append(
-				"			<h1 id=\"pagetitle\">Inquiries</h1>\r\n" + 
 				"       		</div>\r\n" + 
 				"       	</div>\r\n" + 
 				"	</body>\r\n" + 
@@ -52,4 +52,5 @@ public class HtmlBuilder {
 				"</html>");
 				return page.toString();
 	}
+	
 }

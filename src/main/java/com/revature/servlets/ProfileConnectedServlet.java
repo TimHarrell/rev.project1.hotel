@@ -33,7 +33,9 @@ public class ProfileConnectedServlet extends HttpServlet {
 				System.out.println("no input");
 			}
 			else if(input.equals("logout")) {
-				resp.sendRedirect("LogoutServlet");
+				RequestDispatcher rd = req.getRequestDispatcher("LogoutServlet");
+				rd.forward(req, resp);
+				//resp.sendRedirect("LogoutServlet");
 			}
 			else if(input.equals("dashboard")) {
 				

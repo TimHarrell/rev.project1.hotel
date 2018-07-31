@@ -16,7 +16,7 @@ public class InquiryDao {
 	/*
 	 * add a new inquiry when the user wants to
 	 */
-	public static Inquiry makeInquiry(String topic, String userId ) {
+	public static Inquiry makeInquiry(String topic, String body, String userId ) {
 		System.out.println("connecting...");
 		Inquiry inq = new Inquiry();
 		inq.setTopic(topic);
@@ -192,6 +192,49 @@ public class InquiryDao {
 			return true;
 		}
 	
+	public static ArrayList<Inquiry> getInqbyUserId(String userId) {
+		System.out.println("connecting...");
+		
+		ArrayList<Inquiry> inqs = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+			// add the inquiry to the main inquiry table
+			String sql = "SELECT * FROM INQUIRIES WHERE"
+					+ " active= " + 1
+					+ " AND"
+					+ " userId= '" + userId + "'";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Integer inqId = rs.getInt("inqId");
+				Integer act = rs.getInt("active");
+				String usId = rs.getString("userId");
+				String top = rs.getString("topic");
+				ArrayList<Message> messages = getConversationById(inqId);
+				inqs.add(new Inquiry(top, messages, usId, inqId, act));
+			}
+			
+			rs.close();
+			ps.close();
+			
+		}
+		catch(SQLException sql) {
+			sql.printStackTrace();
+			System.out.println("SQL issue");
+			return null;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
+		
+		return inqs;
+	}
+	
 	/*
 	 * get an inquiry row by using active, userId, and topid
 	 * issue: if all three of these happen to be the same in somehwere else two rows will be grabbed
@@ -269,6 +312,34 @@ public class InquiryDao {
 		}
 	}
 	
+	public static Message submitMessage(int inqId, String body, String userId) {
+		System.out.println("connecting...");
+		
+		Message message = new Message(body, userId);
+		PreparedStatement ps = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+			
+				String sql = "INSERT INTO INQUIRY" + inqId + " (message, userId) VALUES (?, ?)";
+				ps = conn.prepareCall(sql);
+				ps.setString(1, body);
+				ps.setString(2, userId);
+				
+				ps.execute();
+				ps.close();
+		}
+		catch(SQLException sql) {
+			sql.printStackTrace();
+			System.out.println("SQL issue");
+			return null;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
+		return message;
+	}
 	public static ArrayList<Message> getConversationById(int id) {
 		System.out.println("connecting...");
 		
