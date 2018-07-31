@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 
 import com.revature.beans.Inquiry;
@@ -27,23 +28,34 @@ public class InquiryDao {
 		
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			// add the inquiry to the main inquiry table
-			insertIntoInq(1, inq.getUserId(), inq.getTopic());
+			if(!insertIntoInq(1, inq.getUserId(), inq.getTopic())) {
+				throw new SQLSyntaxErrorException();
+			};
 			Integer inqId = getInqByParts(1, inq.getUserId(), inq.getTopic());
+			
 			// make a new table, that holds all of the messages
 				// messages are added as they respond
-			String sql = "CREATE TABLE INQUIRY" + inqId + " (" // inqId makes the table unique
-					+ "messageNumber INTEGER," // message number should increment
+			String sql = "CREATE TABLE INQUIRY" + inqId + " ("
+					//+ "messageNumber INTEGER, "
 					+ "message VARCHAR2(1000), "
-					+ "userId VARCHAR2(20), "
-					+ "CONSTRAINT PK_messageNumber PRIMARY KEY (messageNumber)"
-					+ " );";
+					+ "userId VARCHAR2(20) "
+					//+ ", CONSTRAINT PK_messageNumber PRIMARY KEY (messageNumber)"
+					+ " )";
 			
 			ps = conn.prepareStatement(sql);
 			ps.executeQuery();
+			ps.close();
+			
+			submitMessage(inqId, body, userId);
+		}
+		catch(SQLSyntaxErrorException name) {
+			name.printStackTrace();
+			System.out.println("already exists");
+			return null;
 		}
 		catch(SQLException sql) {
 			sql.printStackTrace();
-			System.out.println("SQL issue");
+			System.out.println("SQL issue makeInquiry");
 			return null;
 		}
 		catch(Exception ex) {
@@ -111,7 +123,7 @@ public class InquiryDao {
 		}
 		catch(SQLException sql) {
 			sql.printStackTrace();
-			System.out.println("SQL issue");
+			System.out.println("SQL issue getInqById");
 			return null;
 		}
 		catch(Exception ex) {
@@ -149,7 +161,7 @@ public class InquiryDao {
 		}
 		catch(SQLException sql) {
 			sql.printStackTrace();
-			System.out.println("SQL issue");
+			System.out.println("SQL issue getActive Inquiries");
 			return null;
 		}
 		catch(Exception ex) {
@@ -169,19 +181,20 @@ public class InquiryDao {
 			PreparedStatement ps = null;
 			
 			try(Connection conn = ConnectionUtil.getConnection()) {
+				if(getInqByParts(1, userId, topic) != -1) throw new SQLException();
 				// add the inquiry to the main inquiry table
-				String sql = "INSERT INTO INQUIRIES "
-						+ "(active, userId, topic) "
-						+ "VALUES (" 
-						+ active + ", " // userId
-						+ userId + ", " 
-						+ topic + ");"; 
+				String sql = "INSERT INTO INQUIRIES (active, userId, topic) VALUES ( ?, ?, ?)";
 				ps = conn.prepareStatement(sql);
-				ps.executeQuery();
+				ps.setInt(1, 1);
+				ps.setString(2, userId);
+				ps.setString(3, topic);
+				
+				ps.execute();
+				
 			}
 			catch(SQLException sql) {
 				sql.printStackTrace();
-				System.out.println("SQL issue");
+				System.out.println("SQL issue insertIntoInq");
 				return false;
 			}
 			catch(Exception ex) {
@@ -223,7 +236,7 @@ public class InquiryDao {
 		}
 		catch(SQLException sql) {
 			sql.printStackTrace();
-			System.out.println("SQL issue");
+			System.out.println("SQL issue getInqUserById");
 			return null;
 		}
 		catch(Exception ex) {
@@ -248,16 +261,15 @@ public class InquiryDao {
 		Integer inqId = -1;
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			// add the inquiry to the main inquiry table
-			String sql = "SELECT * FROM INQUIRIES WHERE"
-					+ " active= " + active
-					+ " AND"
-					+ " userId= '" + userId + "'"
-					+ " AND"
-					+ " topic= '" + topic + "'";
+			String sql = "SELECT * FROM INQUIRIES WHERE active=? AND userId=? AND topic=?";
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, 1);
+			ps.setString(2, userId);
+			ps.setString(3, topic);
+			
 			rs = ps.executeQuery();
 			
-			if(!rs.next()) { // if the result set could not find a row, the account does not exist
+			if(!rs.next()) { // if the result set could not find a row, the inq does not exist
 				rs.close();
 				ps.close();
 				System.out.println("could not find row");
@@ -269,13 +281,14 @@ public class InquiryDao {
 			String top = rs.getString("topic");
 			inqId = rs.getInt("inqId");
 			
+			if(rs.next()) throw new SQLException(); // if the inq already exists return -1
 			rs.close();
 			ps.close();
 			
 		}
 		catch(SQLException sql) {
 			sql.printStackTrace();
-			System.out.println("SQL issue");
+			System.out.println("SQL issue getinqbyParts");
 			return -1;
 		}
 		catch(Exception ex) {
@@ -330,7 +343,7 @@ public class InquiryDao {
 		}
 		catch(SQLException sql) {
 			sql.printStackTrace();
-			System.out.println("SQL issue");
+			System.out.println("SQL issue setInqInvalidById");
 			return null;
 		}
 		catch(Exception ex) {
@@ -367,7 +380,7 @@ public class InquiryDao {
 		}
 		catch(SQLException sql) {
 			sql.printStackTrace();
-			System.out.println("SQL issue");
+			System.out.println("SQL issue getConversationById");
 			return null;
 		}
 		catch(Exception ex) {

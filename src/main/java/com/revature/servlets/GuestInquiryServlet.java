@@ -39,9 +39,15 @@ public class GuestInquiryServlet extends HttpServlet {
 			else if(input.equals("Submit Inquiry")) {
 				String topic = req.getParameter("topic");
 				String body = req.getParameter("body");
-				InquiryDao.makeInquiry(topic, body, currUser.getUserId());
+				
+				if(InquiryDao.makeInquiry(topic, body, currUser.getUserId()) == null) {
+					RequestDispatcher rd = req.getRequestDispatcher("ConnectedServlet");
+					rd.forward(req, resp); // if the inquiry already exists
+				}
+				else {
 				RequestDispatcher rd = req.getRequestDispatcher("ConnectedServlet");
 				rd.forward(req, resp);
+				}
 			}
 		}
 	}

@@ -84,13 +84,14 @@ public class ProfileDao {
 		Profile newProfile; 
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "INSERT INTO PROFILES (userID, firstname, lastname, pssword) VALUES (?, ?, ?, ?)";
-			ps = conn.prepareCall(sql);
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, userId);
 			ps.setString(2, firstname);
 			ps.setString(3, lastname);
 			ps.setString(4, password);
 			
 			Boolean result = ps.execute();
+			ps.close();
 			if (!result) {
 				System.out.println("Successful profile submission.");
 				newProfile = new Profile(userId, firstname, lastname, password);
