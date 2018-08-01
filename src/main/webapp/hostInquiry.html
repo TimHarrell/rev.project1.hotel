@@ -9,6 +9,7 @@
             <meta name="keywords" content="hotel">
             <meta name="viewport" content="width=device-width">
             <link type="text/css" rel="stylesheet" href="css/style.css">
+             <link type="text/css" rel="stylesheet" href="css/hostUsers.css">
 	</head>
 	<body>
 		<Header>
@@ -24,10 +25,25 @@
 				</form>
 			</div>
 		</Header>
-		
+	
 			<h1 id="pagetitle">Inquiries</h1>
 		<div class="body">
-			<!-- changes go here -->
+		<form action='HostInquiryResolveServlet' method='post'>
+			<table>
+			<tr>
+				<th>Inquiry ID</th>
+				<th>User ID</th>
+				<th>topic</th>
+				<th>resolve</th>
+			</tr>
+			<tr>
+				<td>id1</td>
+				<td>uId1</td>
+				<td>t1</td>
+				<td><button type='submit' name='id' value='inqId'>resolve</button></td>
+			</tr>
+			</table>
+		</form>
        	</div>
 	</body>
 	<script src="js/profile.js"></script>

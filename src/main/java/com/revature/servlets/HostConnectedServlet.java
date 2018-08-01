@@ -99,7 +99,7 @@ public class HostConnectedServlet extends HttpServlet {
 				""
 				);
 		
-		html.append(
+		html.append("<form action='HostInquiryResolveServlet' method='post'>" +
 				"<table>"
 				);
 		
@@ -116,11 +116,13 @@ public class HostConnectedServlet extends HttpServlet {
 					"<td>" + inq.getId() + "</td>" +
 					"<td>" + inq.getUserId() + "</td>" +
 					"<td>" + inq.getTopic() + "</td>" +
-					"<td>" + "<button>resolve</button>" + "</td>" +
+					"<td>" + "<button" + " type='submit' name='inqId' value=" + inq.getId() + ">resolve</button>" + "</td>" +
 					"</tr>");
 		}
 		
-		html.append("</table>");
+		html.append(
+				"</form>" +
+				"</table>");
 		html.append("</div>\r\n" + 
 				"	</body>\r\n" + 
 				"	<script src=\"js/profile.js\"></script>\r\n" + 

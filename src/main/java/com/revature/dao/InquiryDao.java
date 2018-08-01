@@ -306,8 +306,8 @@ public class InquiryDao {
 			// add the inquiry to the main inquiry table
 			String sql = "UPDATE INQUIRIES SET" 
 					+ " active=" + 0 
-					+ " WHERE" 
-					+ "inqId =" + inqId;
+					+ " WHERE " 
+					+ "inqId=" + inqId;
 			ps = conn.prepareStatement(sql);
 			ps.executeQuery();
 			ps.close();
