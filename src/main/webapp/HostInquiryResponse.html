@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		
+		<meta charset="ISO-8859-1">
+		 <title>Overlook Hotel</title>
+            <meta name="author" content="tim">
+            <meta name="keywords" content="hotel">
+            <meta name="viewport" content="width=device-width">
+            <link type="text/css" rel="stylesheet" href="css/style.css">
+            <link type="text/css" rel="styleSheet" href="css/HostInquiryResponse.css">
+	</head>
+	<body> <!--  onload="form.action='ProfileConnected'"> -->
+		<header>
+		
+			<div class="navbar">
+				<form action="HostConnectedServlet" method="get">
+				<button type="submit" id="logout" class="navbarbutton" name="input" value="logout">Logout</button>
+				<button type="submit" id="reservations" class="navbarbutton" name="input" value="reservations">Reservations</button>
+				<button type="submit" id="hostspeak" class="navbarbutton" name="input" value="inquiry">Inquiries</button>
+				<button type="submit" id="dashboard" class="navbarbutton" name="input" value="users">Users</button>
+				<button type="submit" id="profile" class="navbarbutton" name="input" value="profile">Profile</button>
+				</form>
+			</div>
+		</header>
+		<h1 id="pagetitle">Inquiries</h1>
+		<div>
+			<textarea name='bodyinput' rows='4' cols='50'>
+			Enter your response here.
+			</textarea>
+       	
+       		<button type='submit'>submit response</button>
+       	</div>
+	
+	<script src="js/profile.js"></script>
+</body></html>
