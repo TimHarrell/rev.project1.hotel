@@ -143,6 +143,11 @@ public class GuestInquiryServlet extends HttpServlet {
 					"				<button type=\"submit\"  id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inquiry\">Inquiry</button>\r\n" + 
 					"				<button type=\"submit\"  id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>" +
 					"				</form>" +
+					"			<form class='navbar' action =\"GuestInquiry\" method='post'>\r\n" + 
+					"				<!-- more changes here --> \r\n" + 
+					"				<button type=\"submit\" class=\"subnavbarbutton\" name=\"input\" value=\"makeInquiry\">make</button>\r\n" + 
+					"       			<button type=\"submit\" class=\"subnavbarbutton\" name=\"input\" value=\"viewInquiry\">view</button>\r\n" + 
+					"			</form>" +
 					"			</div>\r\n" + 
 					"		</Header>\r\n" + 
 					"		\r\n" + 
@@ -152,13 +157,14 @@ public class GuestInquiryServlet extends HttpServlet {
 					StringBuilder inqs = new StringBuilder();
 					ArrayList<Inquiry> list = InquiryDao.getInqbyUserId(profile.getUserId());
 					
+					html.append("<form><ul>");
 					for(Inquiry inq : list) {
-						inqs.append("<a>"
+						inqs.append("<li><a>"
 								+ inq.getId()
-								+ "</a>");
+								+ "</a></li>");
 					}
 					html.append(inqs.toString());
-			
+					html.append("</ul> </form>");
 					html.append(
 					"       	</div>\r\n" + 
 					"	</body>\r\n" + 
@@ -168,5 +174,53 @@ public class GuestInquiryServlet extends HttpServlet {
 					);
 			
 			return html.toString();
+	}
+	
+	private static String respondHtml(Profile profile) {
+		
+		StringBuilder html = new StringBuilder();
+		
+		html.append( 
+				"<html>\r\n" + 
+				"	<head>\r\n" + 
+				"		\r\n" + 
+				"		<head>\r\n" + 
+				"		<meta charset=\"ISO-8859-1\">\r\n" + 
+				"		 <title>Overlook Hotel</title>\r\n" + 
+				"            <meta name=\"author\" content=\"tim\">\r\n" + 
+				"            <meta name=\"keywords\" content=\"hotel\">\r\n" + 
+				"            <meta name=\"viewport\" content=\"width=device-width\">\r\n" + 
+				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/style.css\">\r\n" + 
+				"	</head>\r\n" + 
+				"	<body>\r\n" + 
+				"		<Header>\r\n" + 
+				"			<div class=\"navbar\">\r\n" +  
+				"				<form action=\"ProfileConnected\">\r\n" + 
+				"				<button type=\"submit\"  id=\"logout\" class=\"navbarbutton\" name=\"input\" value=\"logout\">Logout</button>\r\n" + 
+				"				<button type=\"submit\"  id=\"dashboard\" class=\"navbarbutton\" name=\"input\" value=\"dashboard\">Dash board</button>\r\n" + 
+				"				<button type=\"submit\"  id=\"reservations\" class=\"navbarbutton\" name=\"input\" value=\"reservations\">Reservations</button>\r\n" + 
+				"				<button type=\"submit\"  id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inquiry\">Inquiry</button>\r\n" + 
+				"				<button type=\"submit\"  id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>" +
+				"				</form>" +
+				"			<form class='navbar' action =\"GuestInquiry\" method='post'>\r\n" + 
+				"				<!-- more changes here --> \r\n" + 
+				"				<button type=\"submit\" class=\"subnavbarbutton\" name=\"input\" value=\"makeInquiry\">make</button>\r\n" + 
+				"       			<button type=\"submit\" class=\"subnavbarbutton\" name=\"input\" value=\"viewInquiry\">view</button>\r\n" + 
+				"			</form>" +
+				"			</div>\r\n" + 
+				"		</Header>\r\n" + 
+				"		\r\n" + 
+				"		\r\n" +
+				"		<div>\r\n"
+				); 
+				html.append(
+				"       	</div>\r\n" + 
+				"	</body>\r\n" + 
+				"	<script src=\"js/profile.js\"></script>\r\n" + 
+				"</html>"
+				
+				);
+		
+		return html.toString();
 	}
 }

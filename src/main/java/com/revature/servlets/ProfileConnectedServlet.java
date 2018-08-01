@@ -37,9 +37,6 @@ public class ProfileConnectedServlet extends HttpServlet {
 				rd.forward(req, resp);
 				//resp.sendRedirect("LogoutServlet");
 			}
-			else if(input.equals("dashboard")) {
-				
-			}
 			else if(input.equals("reservations")) {
 				
 			}

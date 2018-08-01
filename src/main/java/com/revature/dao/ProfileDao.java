@@ -74,9 +74,53 @@ public class ProfileDao {
 		return profile;
 	}
 	
+	public static ArrayList<Profile> getAllProfiles() {
+		System.out.println("connecting...");
+		PreparedStatement ps = null;
+		ArrayList<Profile> profiles = new ArrayList<>();
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+		    
+			String sql = "SELECT * FROM PROFILES";
+			ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				String storedUserId = rs.getString("userID");
+				String storedFirstname = rs.getString("firstname");
+				String storedLastname = rs.getString("lastname");
+				String storedPassword = rs.getString("pssword");
+				Boolean storedHost;
+				if(rs.getInt("hst") == 1) {
+					storedHost = true;
+				}
+				else {
+					storedHost = false;
+				}
+				
+				profiles.add(new Profile(storedUserId, storedFirstname, storedLastname, storedPassword, storedHost));
+			}
+			
+			rs.close();
+			ps.close();
+			
+			System.out.println("grabbed all profiles");
+		} 
+		catch(SQLException sql) {
+			sql.printStackTrace();
+			System.out.println("SQL issue");
+			return null;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
+		return profiles;
+	}
+	
 	/*
-	 * needs works
-	 * REMEMBER TO ADD STUFF FOR INVALIDCHARACTERS, make the escape character invalid
+	 * makes a profile
 	 */
 	public static Profile makeProfile(String userId, String firstname, String lastname, String password) {
 		PreparedStatement ps = null;

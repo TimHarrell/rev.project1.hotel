@@ -50,7 +50,11 @@ public class ProfileServlet extends HttpServlet  {
 			resp.getWriter().write(buildLoginHTML(""));
 		}
 		else {
-			resp.sendRedirect("ProfileConnected");
+			if( ((Profile)session.getAttribute("profile")).isHost())
+				resp.sendRedirect("HostConnectedServlet");
+			else {
+				resp.sendRedirect("ProfileConnected");
+			}
 		}
 		
 	}

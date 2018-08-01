@@ -63,14 +63,42 @@
     <servlet-name>DashboardServlet</servlet-name>
     <url-pattern>/DashboardServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>GuestInquiry</servlet-name>
-  	<servlet-class>com.revature.servlets.GuestInquiryServlet</servlet-class>
+    <servlet-name>GuestInquiry</servlet-name>
+    <servlet-class>com.revature.servlets.GuestInquiryServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>GuestInquiry</servlet-name>
-  	<url-pattern>/GuestInquiry</url-pattern>
+    <servlet-name>GuestInquiry</servlet-name>
+    <url-pattern>/GuestInquiry</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <description></description>
+    <display-name>HostConnectedServlet</display-name>
+    <servlet-name>HostConnectedServlet</servlet-name>
+    <servlet-class>com.revature.servlets.HostConnectedServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HostConnectedServlet</servlet-name>
+    <url-pattern>/HostConnectedServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>hostUsersServlet</display-name>
+    <servlet-name>hostUsersServlet</servlet-name>
+    <servlet-class>com.revature.servlets.hostUsersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>hostUsersServlet</servlet-name>
+    <url-pattern>/hostUsersServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HostInquiryResolveServlet</display-name>
+    <servlet-name>HostInquiryResolveServlet</servlet-name>
+    <servlet-class>com.revature.servlets.HostInquiryResolveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HostInquiryResolveServlet</servlet-name>
+    <url-pattern>/HostInquiryResolveServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

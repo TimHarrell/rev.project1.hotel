@@ -76,7 +76,7 @@ public class InquiryDao {
 		Inquiry inq = new Inquiry();
 		try(Connection conn = ConnectionUtil.getConnection()) {
 		    
-			String sql = "SELECT * FROM INQUIRES WHERE userId='" + inqId + "'";
+			String sql = "SELECT * FROM INQUIRES WHERE userId=" + inqId;
 			ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
@@ -214,10 +214,7 @@ public class InquiryDao {
 		
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			// add the inquiry to the main inquiry table
-			String sql = "SELECT * FROM INQUIRIES WHERE"
-					+ " active= " + 1
-					+ " AND"
-					+ " userId= '" + userId + "'";
+			String sql = "SELECT * FROM INQUIRIES WHERE active=1 AND userId='" + userId +"'";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			

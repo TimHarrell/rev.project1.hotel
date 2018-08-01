@@ -24,10 +24,20 @@ footer {
 	color: yellow;
 	text-align: center;
 }
+
+.body {
+
+	background-color: #8e0000;
+	color: yellow;
+}
+.body a {
+	font-size: 17px;
+}
 /* nav bar */
 .navbar {
 	background-color: black;
 	overflow: hidden;
+	font-size: 17px;
 }
 
 .navbarbutton {
