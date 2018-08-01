@@ -15,28 +15,8 @@ import com.revature.dao.ProfileDao;
 
 public class ProfileServlet extends HttpServlet  {
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-		Profile profile = ProfileDao.getProfile(username, password);
-		
-		if(profile == null) {
-			resp.setContentType("text/html");
-			resp.getWriter().write("make account?");
-		}
-		else {
-			RequestDispatcher rd = req.getRequestDispatcher("profile.html");
-			rd.forward(req, resp);
-		}
-		
-	}
-	/*
-	 * handles login attempts
-	 * prevent going to a profile page if a profile is invalid
-	*/
+	
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

@@ -93,12 +93,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>HostInquiryResolveServlet</display-name>
-    <servlet-name>HostInquiryResolveServlet</servlet-name>
-    <servlet-class>com.revature.servlets.HostInquiryResolveServlet</servlet-class>
+    <display-name>HostInquiryHandlerServlet</display-name>
+    <servlet-name>HostInquiryHandlerServlet</servlet-name>
+    <servlet-class>com.revature.servlets.HostInquiryHandlerServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>HostInquiryResolveServlet</servlet-name>
-    <url-pattern>/HostInquiryResolveServlet</url-pattern>
+    <servlet-name>HostInquiryHandlerServlet</servlet-name>
+    <url-pattern>/HostInquiryHandlerServlet</url-pattern>
   </servlet-mapping>
 </web-app>
