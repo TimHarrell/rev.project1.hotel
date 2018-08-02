@@ -121,4 +121,24 @@
     <servlet-name>GuestMakeInquiryServlet</servlet-name>
     <url-pattern>/GuestMakeInquiryServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GuestResponseServlet</display-name>
+    <servlet-name>GuestResponseServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GuestResponseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GuestResponseServlet</servlet-name>
+    <url-pattern>/GuestResponseServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GuestInquiryHandlerServlet</display-name>
+    <servlet-name>GuestInquiryHandlerServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GuestInquiryHandlerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GuestInquiryHandlerServlet</servlet-name>
+    <url-pattern>/GuestInquiryHandlerServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

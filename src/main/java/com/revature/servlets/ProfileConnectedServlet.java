@@ -117,17 +117,28 @@ public class ProfileConnectedServlet extends HttpServlet {
 				
 		// main page
 		StringBuilder mainPage = new StringBuilder();
-		StringBuilder inqs = new StringBuilder();
-		ArrayList<Inquiry> list = InquiryDao.getInqbyUserId(profile.getUserId());
+		mainPage.append("<form action='GuestInquiryHandlerServlet' method='post'>" +
+				"<table>"
+				);
 		
-		mainPage.append("<form><ul>");
+		ArrayList<Inquiry> list = InquiryDao.getActiveInquiries();
+		mainPage.append("<tr>" +
+				"<th>Inquiry ID</th>\r\n" + 
+				"<th>Topic</th>\r\n" + 
+				"<th>Mark Resolved</th>" +
+				"<th>Respond</th>" +
+				"</tr>");
 		for(Inquiry inq : list) {
-			inqs.append("<li><a>"
-					+ inq.getId()
-					+ "</a></li>");
+			mainPage.append("<tr>" +
+					"<td>" + inq.getId() + "</td>" +
+					"<td>" + inq.getTopic() + "</td>" +
+					"<td>" + "<button" + " type='submit' name='inqIdRespond' value=" + inq.getId() + ">Reply</button>" + "</td>" +
+					"</tr>");
 		}
-		mainPage.append(inqs.toString());
-		mainPage.append("</ul> </form>");
+		
+		mainPage.append(
+				"</form>" +
+				"</table>");
 		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Inqueries: view", mainPage.toString());
 	}
 	

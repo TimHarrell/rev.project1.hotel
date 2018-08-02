@@ -36,7 +36,7 @@ public class InquiryDao {
 			// make a new table, that holds all of the messages
 				// messages are added as they respond
 			String sql = "CREATE TABLE INQUIRY" + inqId + " ("
-					//+ "messageNumber INTEGER, "
+					+ "messageNumber INTEGER, "
 					+ "message VARCHAR2(1000), "
 					+ "userId VARCHAR2(20) "
 					//+ ", CONSTRAINT PK_messageNumber PRIMARY KEY (messageNumber)"
@@ -181,14 +181,14 @@ public class InquiryDao {
 			PreparedStatement ps = null;
 			
 			try(Connection conn = ConnectionUtil.getConnection()) {
-				if(getInqByParts(1, userId, topic) != -1) throw new SQLException();
+				if(getInqByParts(1, userId, topic) != -1) throw new SQLException(); // if it already exists, don't add it
 				// add the inquiry to the main inquiry table
-				String sql = "INSERT INTO INQUIRIES (active, userId, topic) VALUES ( ?, ?, ?)";
+				String sql = "INSERT INTO INQUIRIES (active, userId, topic, numMessages) VALUES ( ?, ?, ?, ?)";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, 1);
 				ps.setString(2, userId);
 				ps.setString(3, topic);
-				
+				ps.setInt(4, 0);
 				ps.execute();
 				
 			}
@@ -329,13 +329,22 @@ public class InquiryDao {
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionUtil.getConnection()) {
+				
+				String sql = "Select NumMessages FROM INQUIRIES WHERE inqid=?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, inqId);
 			
-				String sql = "INSERT INTO INQUIRY" + inqId + " (message, userId) VALUES (?, ?)";
+				ResultSet rs = ps.executeQuery();
+				if(!rs.next()) throw new SQLException();
+				int count = rs.getInt("numMessages");
+				sql = "INSERT INTO INQUIRY" + inqId + " (message, userId) VALUES (?, ?)";
 				ps = conn.prepareCall(sql);
 				ps.setString(1, body);
 				ps.setString(2, userId);
 				
 				ps.execute();
+				
+				
 				ps.close();
 		}
 		catch(SQLException sql) {

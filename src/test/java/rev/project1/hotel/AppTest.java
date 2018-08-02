@@ -24,7 +24,7 @@ public class AppTest extends TestCase {
 	
 	@Test
 	public void testGetInqId() {
-		if(3 == InquiryDao.getInqByParts(1,  "dummy", "dummy")) {
+		if(21 == InquiryDao.getInqByParts(1,  "t", "t")) {
 			assertTrue(true);
 		}
 		else {
@@ -32,7 +32,8 @@ public class AppTest extends TestCase {
 		}
 	}
 	
-	public void testgetpendRes() {
+	public void testmakeInq() {
+		InquiryDao.makeInquiry("d", "d", "d");
 		
 	}
 }

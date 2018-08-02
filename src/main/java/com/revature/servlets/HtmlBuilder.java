@@ -17,8 +17,8 @@ public class HtmlBuilder {
 				"            <meta name='keywords' content='hotel'>\r\n" + 
 				"            <meta name='viewport' content='width=device-width'>\r\n" + 
 				"            <link type='text/css' rel='stylesheet' href='css/style.css'>\r\n" + 
-				"			 <link type='text/css' rel='stylesheet' href='css/HostTables.css'" +
-				"			 <link type='text/css' rel='stylesheet' href='css/messageformat.css'" +
+				"			 <link type='text/css' rel='stylesheet' href='css/HostTables.css>'" +
+				"			 <link type='text/css' rel='stylesheet' href='css/messageformat.css>'" +
 				"	</head>\r\n" + 
 				"	<body>\r\n" + 
 				"		<header>\r\n" + 
@@ -62,7 +62,9 @@ public class HtmlBuilder {
 				"            <meta name='keywords' content='hotel'>\r\n" + 
 				"            <meta name='viewport' content='width=device-width'>\r\n" + 
 				"            <link type='text/css' rel='stylesheet' href='css/style.css'>\r\n" + 
-				"			<link type='text/css' rel='stylesheet' href='css/GuestProfile.css'>" +
+				"			 <link type='text/css' rel='stylesheet' href='css/HostTables.css>'" +
+				"			 <link type='text/css' rel='stylesheet' href='css/messageformat.css>'" +
+				"			 <link type='text/css' rel='stylesheet' href='css/GuestProfile.css'>" +
 				"	</head>\r\n" + 
 				"	<body>" +
 				"		<header>\r\n" + 
