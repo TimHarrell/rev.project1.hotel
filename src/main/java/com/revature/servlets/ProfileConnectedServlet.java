@@ -121,7 +121,7 @@ public class ProfileConnectedServlet extends HttpServlet {
 				"<table>"
 				);
 		
-		ArrayList<Inquiry> list = InquiryDao.getActiveInquiries();
+		ArrayList<Inquiry> list = InquiryDao.getInqbyUserId(profile.getUserId());
 		mainPage.append("<tr>" +
 				"<th>Inquiry ID</th>\r\n" + 
 				"<th>Topic</th>\r\n" + 

@@ -44,7 +44,15 @@ public class GuestInquiryHandlerServlet extends HttpServlet {
 		
 		StringBuilder addition = new StringBuilder();
 		ArrayList<Message> messages = InquiryDao.getConversationById(inqId);
-		for(Message m : messages) {
+		ArrayList<Message> sorted = new ArrayList<>();
+		
+		for(int j = 1; j <= messages.size(); j++) {
+			for(Message m : messages) { 
+				if(m.getMessageNumber() == j) sorted.add(m);
+			}
+		}
+		
+		for(Message m : sorted) {
 			addition.append(
 							"<p style='max-width:300px;color:yellow;word-wrap:break-word;padding-left:30px'>" + m.getSender() + ": " +
 							m.getMessage() + "</p>"

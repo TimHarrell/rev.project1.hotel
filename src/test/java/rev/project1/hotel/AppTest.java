@@ -33,7 +33,7 @@ public class AppTest extends TestCase {
 	}
 	
 	public void testmakeInq() {
-		InquiryDao.makeInquiry("d", "d", "d");
+		InquiryDao.makeInquiry("l", "l", "l");
 		
 	}
 }

@@ -39,7 +39,7 @@ public class InquiryDao {
 					+ "messageNumber INTEGER, "
 					+ "message VARCHAR2(1000), "
 					+ "userId VARCHAR2(20) "
-					//+ ", CONSTRAINT PK_messageNumber PRIMARY KEY (messageNumber)"
+					+ ", CONSTRAINT PK_messageNumber" + inqId + " PRIMARY KEY (messageNumber)"
 					+ " )";
 			
 			ps = conn.prepareStatement(sql);
@@ -214,8 +214,9 @@ public class InquiryDao {
 		
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			// add the inquiry to the main inquiry table
-			String sql = "SELECT * FROM INQUIRIES WHERE active=1 AND userId='" + userId +"'";
+			String sql = "SELECT * FROM INQUIRIES WHERE active=1 AND userId=?";
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, userId);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -333,14 +334,22 @@ public class InquiryDao {
 				String sql = "Select NumMessages FROM INQUIRIES WHERE inqid=?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, inqId);
-			
 				ResultSet rs = ps.executeQuery();
 				if(!rs.next()) throw new SQLException();
-				int count = rs.getInt("numMessages");
-				sql = "INSERT INTO INQUIRY" + inqId + " (message, userId) VALUES (?, ?)";
+				int count = rs.getInt("NumMessages");
+				
+				sql = "UPDATE INQUIRIES SET NumMessages=? WHERE inqId=?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, count + 1);
+				ps.setInt(2, inqId);
+				
+				ps.execute();
+				
+				sql = "INSERT INTO INQUIRY" + inqId + " (messageNumber, message, userId) VALUES (?, ?, ?)";
 				ps = conn.prepareCall(sql);
-				ps.setString(1, body);
-				ps.setString(2, userId);
+				ps.setInt(1, count + 1);
+				ps.setString(2, body);
+				ps.setString(3, userId);
 				
 				ps.execute();
 				
@@ -349,7 +358,7 @@ public class InquiryDao {
 		}
 		catch(SQLException sql) {
 			sql.printStackTrace();
-			System.out.println("SQL issue setInqInvalidById");
+			System.out.println("SQL issue submit issue");
 			return null;
 		}
 		catch(Exception ex) {
@@ -377,7 +386,8 @@ public class InquiryDao {
 			while(rs.next()) { 
 				String message = rs.getString("message");
 				String user = rs.getString("userId");
-				messages.add(new Message(message, user));
+				int mn = rs.getInt("messageNumber");
+				messages.add(new Message(message, user, mn));
 			}
 			
 			rs.close();
