@@ -26,14 +26,15 @@ public class ProfileServlet extends HttpServlet  {
 		HttpSession session = req.getSession();
 		session.setAttribute("profile", profile);
 		if(session.getAttribute("profile")== null) {
-			resp.setContentType("text/HTML");
-			resp.getWriter().write(buildLoginHTML(""));
+			session.invalidate();
+			resp.sendRedirect("login.html");
 		}
 		else {
 			if( ((Profile)session.getAttribute("profile")).isHost())
 				resp.sendRedirect("HostConnectedServlet");
 			else {
-				resp.sendRedirect("ProfileConnected");
+				resp.setContentType("text/HTML");
+				resp.getWriter().write(HtmlBuilder.makeGuestProfileHtml("", "Dash Board", ""));
 			}
 		}
 		

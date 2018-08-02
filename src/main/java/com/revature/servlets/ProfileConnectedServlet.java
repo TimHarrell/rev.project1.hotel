@@ -38,23 +38,21 @@ public class ProfileConnectedServlet extends HttpServlet {
 				//resp.sendRedirect("LogoutServlet");
 			}
 			else if(input.equals("reservations")) {
+				resp.setContentType("text/HTML");
 				
 			}
 			else if(input.equals("inquiry")) { // Inquiry selected
-				if(currUser.isHost()) {
 					//resp.sendRedirect("hostInquiry.html");
 					resp.setContentType("text/HTML");
-					resp.getWriter().write(HtmlBuilder.hostInquiry());
-				}
-				else {
-					resp.sendRedirect("guestInquiry.html");
-				}
+					resp.getWriter().write(makeInquiryGuestHtml());
 			}
-			else if(input.equals("makeInquiry")) { // inquiry sub select make
-				
+			else if(input.equals("makeinq")) { // inquiry sub select make
+				resp.setContentType("text/HTML");
+				resp.getWriter().write(makeInquiryGuestMakeHtml());
 			}
-			else if(input.equals("viewInquiry")) { // inquiry sub select view
-				
+			else if(input.equals("viewinq")) { // inquiry sub select view
+				resp.setContentType("text/HTML");
+				resp.getWriter().write(makeInquiryGuestViewHtml());
 			}
 			else if(input.equals("profile")) {
 			}
@@ -64,75 +62,59 @@ public class ProfileConnectedServlet extends HttpServlet {
 			}
 		}
 	}
-
-	private String makeProfileHtml(String buttons, String title, String mainPage) {
-		StringBuilder html = new StringBuilder();
-		html.append( 
-				"<html>\r\n" + 
-				"	<head>\r\n" + 
-				"		\r\n" + 
-				"		<head>\r\n" + 
-				"		<meta charset=\"ISO-8859-1\">\r\n" + 
-				"		 <title>Overlook Hotel</title>\r\n" + 
-				"            <meta name=\"author\" content=\"tim\">\r\n" + 
-				"            <meta name=\"keywords\" content=\"hotel\">\r\n" + 
-				"            <meta name=\"viewport\" content=\"width=device-width\">\r\n" + 
-				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/style.css\">\r\n" + 
-				"	</head>\r\n" + 
-				"	<body>\r\n" + 
-				"		<Header>\r\n" + 
-				"			<div class=\"navbar\">\r\n" +  
-				"				<form action=\"ProfileConnected\">\r\n" + 
-				"				<button type=\"submit\"  id=\"logout\" class=\"navbarbutton\" name=\"input\" value=\"logout\">Logout</button>\r\n" + 
-				"				<button type=\"submit\"  id=\"dashboard\" class=\"navbarbutton\" name=\"input\" value=\"dashboard\">Dash board</button>\r\n" + 
-				"				<button type=\"submit\"  id=\"reservations\" class=\"navbarbutton\" name=\"input\" value=\"reservations\">Reservations</button>\r\n" + 
-				"				<button type=\"submit\"  id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inquiry\">Inquiry</button>\r\n" + 
-				"				<button type=\"submit\"  id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>");
-				
-				html.append(buttons);
-				
-				html.append(
-				"				</form>" +
-				"			</div>\r\n" + 
-				"		</Header>\r\n" + 
-				"		\r\n" + 
-				"		\r\n" +
-				"		<div>\r\n" +
-				"	<h1 id='pagetitle'>" +
-				title +
-				"</h1>"
-				); 
-		
-				html.append(title);
-				
-				html.append(mainPage);
-				
-				html.append(
-				"       	</div>\r\n" + 
-				"	</body>\r\n" + 
-				"	<script src=\"js/profile.js\"></script>\r\n" + 
-				"</html>"
-				
-				);
-		return html.toString();
-	}
+	
 	
 	private String makeInquiryGuestHtml() {
 		// buttons
 		StringBuilder buttons = new StringBuilder();
-		
+		buttons.append(
+				"<button type='submit' id='makeinq' class='subnavbarbutton' name='input' value='makeinq'>make</button>" +
+				"<button type='submit' id='makeinq' class='subnavbarbutton' name='input' value='viewinq'>view</button>"
+				);
 		// main page
 		StringBuilder mainPage = new StringBuilder();
-		return makeProfileHtml(buttons.toString(), "Inquires", mainPage.toString());
+		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Inquires", mainPage.toString());
 	}
 	
 	private String makeInquiryGuestMakeHtml() {
 		// buttons
 		StringBuilder buttons = new StringBuilder();
+		buttons.append(
+				"<button type='submit' id='makeinq' class='subnavbarbutton' name='input' value='makeinq'>make</button>" +
+				"<button type='submit' id='makeinq' class='subnavbarbutton' name='input' value='viewinq'>view</button>"
+				);
 		
 		// main page
 		StringBuilder mainPage = new StringBuilder();
-		return makeProfileHtml(buttons.toString(), "Inqueries: make", mainPage.toString());
+		
+		mainPage.append("<div align='center'>\r\n" + 
+				"				<form action='GuestInquiry' method='post'>\r\n" + 
+				"					topic:\r\n" + 
+				"					<br>\r\n" + 
+				"					<input id='topic' type='text' name='topic'>\r\n" + 
+				"					<br>\r\n" + 
+				"					body:\r\n" + 
+				"					<br>\r\n" + 
+				"					<input id='body' type='text' name ='body'>\r\n" + 
+				"					<br>\r\n" + 
+				"					<input type='submit' name='input' value='Submit Inquiry'>\r\n" + 
+				"				</form>\r\n" + 
+				"			</div>"
+				);
+		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Inqueries: make", mainPage.toString());
+	}
+	
+	private String makeInquiryGuestViewHtml() {
+		// buttons
+		StringBuilder buttons = new StringBuilder();
+		buttons.append(
+				"<button type='submit' id='makeinq' class='subnavbarbutton' name='input' value='makeinq'>make</button>" +
+				"<button type='submit' id='makeinq' class='subnavbarbutton' name='input' value='viewinq'>view</button>"
+				);
+				
+		// main page
+		StringBuilder mainPage = new StringBuilder();
+		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Inqueries: view", mainPage.toString());
 	}
 	
 	private String makeInquiryHostHtml() {

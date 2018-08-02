@@ -32,16 +32,7 @@ public class AppTest extends TestCase {
 		}
 	}
 	
-	public void testMakeInquiry() {
-		try {
-			
-		}
-		catch(Exception e) {
-			assertTrue(false);
-		}
-		assertTrue(true);
-	}
-	public void testInsertAndGetInq() {
+	public void testgetpendRes() {
 		
 	}
 }
