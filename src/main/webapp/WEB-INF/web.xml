@@ -101,4 +101,14 @@
     <servlet-name>HostInquiryHandlerServlet</servlet-name>
     <url-pattern>/HostInquiryHandlerServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HostResponseServlet</display-name>
+    <servlet-name>HostResponseServlet</servlet-name>
+    <servlet-class>com.revature.servlets.HostResponseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HostResponseServlet</servlet-name>
+    <url-pattern>/HostResponseServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

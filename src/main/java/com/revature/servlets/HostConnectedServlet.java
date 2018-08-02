@@ -32,7 +32,8 @@ public class HostConnectedServlet extends HttpServlet {
 			Profile currUser = (Profile) session.getAttribute("profile");
 			
 			if(input == null) {
-				resp.sendRedirect("hostProfile.html");
+				resp.setContentType("text/HTML");
+				resp.getWriter().write(makeHostDashBoardHtml());
 				System.out.println("no input");
 			}
 			else if(input.equals("logout")) {
@@ -64,48 +65,15 @@ public class HostConnectedServlet extends HttpServlet {
 	}
 
 	private String makeHostInquiriesHtml() {
-		StringBuilder html = new StringBuilder();
-		html.append(
-				"<!DOCTYPE html>\r\n" + 
-				"<html>\r\n" + 
-				"	<head>\r\n" + 
-				"		\r\n" + 
-				"		<head>\r\n" + 
-				"		<meta charset=\"ISO-8859-1\">\r\n" + 
-				"		 <title>Overlook Hotel</title>\r\n" + 
-				"            <meta name=\"author\" content=\"tim\">\r\n" + 
-				"            <meta name=\"keywords\" content=\"hotel\">\r\n" + 
-				"            <meta name=\"viewport\" content=\"width=device-width\">\r\n" + 
-				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/style.css\">\r\n" + 
-				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/hostUsers.css\">\r\n" + 
-				"	</head>\r\n" + 
-				"	<body>\r\n" + 
-				"		<Header>\r\n" + 
-				"		\r\n" + 
-				"			<div class=\"navbar\">\r\n" + 
-				"				<form action=\"HostConnectedServlet\">\r\n" + 
-				"				<form action=\"HostConnectedServlet\" method=\"get\">\r\n" + 
-				"				<button type=\"submit\" id=\"logout\" class=\"navbarbutton\" name=\"input\" value=\"logout\">Logout</button>\r\n" + 
-				"				<button type=\"submit\" id=\"reservations\" class=\"navbarbutton\" name=\"input\" value=\"reservations\">Reservations</button>\r\n" + 
-				"				<button type=\"submit\" id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inquiry\">Inquiries</button>\r\n" + 
-				"				<button type=\"submit\" id=\"dashboard\" class=\"navbarbutton\" name=\"input\" value=\"users\">Users</button>\r\n" + 
-				"				<button type=\"submit\" id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>\r\n" + 
-				"				</form>" +
-				"				</form>\r\n" + 
-				"			</div>\r\n" + 
-				"		</Header>\r\n" + 
-				"			<h1 id=\"pagetitle\">Inquiries</h1>" +
-				"			<div class=\"body\">" +
-				""
-				);
+		StringBuilder addition = new StringBuilder();
 		
-		html.append("<form action='HostInquiryHandlerServlet' method='post'>" +
+		addition.append("<form action='HostInquiryHandlerServlet' method='post'>" +
 				"<table>"
 				);
 		
 		ArrayList<Inquiry> list = InquiryDao.getActiveInquiries();
 		
-		html.append("<tr>" +
+		addition.append("<tr>" +
 				"<th>Inquiry ID</th>\r\n" + 
 				"<th>User ID</th>\r\n" + 
 				"<th>Topic</th>\r\n" + 
@@ -113,7 +81,7 @@ public class HostConnectedServlet extends HttpServlet {
 				"<th>Respond</th>" +
 				"</tr>");
 		for(Inquiry inq : list) {
-			html.append("<tr>" +
+			addition.append("<tr>" +
 					"<td>" + inq.getId() + "</td>" +
 					"<td>" + inq.getUserId() + "</td>" +
 					"<td>" + inq.getTopic() + "</td>" +
@@ -122,67 +90,31 @@ public class HostConnectedServlet extends HttpServlet {
 					"</tr>");
 		}
 		
-		html.append(
+		addition.append(
 				"</form>" +
 				"</table>");
-		html.append("</div>\r\n" + 
-				"	</body>\r\n" + 
-				"	<script src=\"js/profile.js\"></script>\r\n" + 
-				"</html>");
 		
-		return html.toString();
+		
+		return HtmlBuilder.makeHostProfileHtml(addition.toString(), "Inquiries");
 	}
 	
 	private String makeHostUserHtml() {
-		StringBuilder html = new StringBuilder();
-		html.append(
-				"<!DOCTYPE html>\r\n" + 
-				"<html>\r\n" + 
-				"	<head>\r\n" + 
-				"		\r\n" + 
-				"		<head>\r\n" + 
-				"		<meta charset=\"ISO-8859-1\">\r\n" + 
-				"		 <title>Overlook Hotel</title>\r\n" + 
-				"            <meta name=\"author\" content=\"tim\">\r\n" + 
-				"            <meta name=\"keywords\" content=\"hotel\">\r\n" + 
-				"            <meta name=\"viewport\" content=\"width=device-width\">\r\n" + 
-				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/style.css\">\r\n" + 
-				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/hostUsers.css\">\r\n" + 
-				"	</head>\r\n" + 
-				"	<body>\r\n" + 
-				"		<Header>\r\n" + 
-				"		\r\n" + 
-				"			<div class=\"navbar\">\r\n" + 
-				"				<form action=\"HostConnectedServlet\">\r\n" + 
-				"				<form action=\"HostConnectedServlet\" method=\"get\">\r\n" + 
-				"				<button type=\"submit\" id=\"logout\" class=\"navbarbutton\" name=\"input\" value=\"logout\">Logout</button>\r\n" + 
-				"				<button type=\"submit\" id=\"reservations\" class=\"navbarbutton\" name=\"input\" value=\"reservations\">Reservations</button>\r\n" + 
-				"				<button type=\"submit\" id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inquiry\">Inquiries</button>\r\n" + 
-				"				<button type=\"submit\" id=\"dashboard\" class=\"navbarbutton\" name=\"input\" value=\"users\">Users</button>\r\n" + 
-				"				<button type=\"submit\" id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>\r\n" + 
-				"				</form>" +
-				"				</form>\r\n" + 
-				"			</div>\r\n" + 
-				"		</Header>\r\n" + 
-				"			<h1 id=\"pagetitle\">Users</h1>" +
-				"			<div class=\"body\">" +
-				""
-				);
+		StringBuilder addition = new StringBuilder();
 		
-		html.append(
+		addition.append("<form action='HostInquiryHandlerServlet' method='post'>" +
 				"<table>"
 				);
 		
 		ArrayList<Profile> list = ProfileDao.getAllProfiles();
 		
-		html.append("<tr>" +
+		addition.append("<tr>" +
 				"<th>User Id</th>\r\n" + 
 				"<th>First Name</th>\r\n" + 
 				"<th>Last Name</th>\r\n" + 
 				"<th>Password</th>" + 
 				"</tr>");
 		for(Profile prof : list) {
-			html.append("<tr>" +
+			addition.append("<tr>" +
 					"<td>" + prof.getUserId() + "</td>" +
 					"<td>" + prof.getFirstName() + "</td>" +
 					"<td>" + prof.getLastName() + "</td>" +
@@ -190,62 +122,25 @@ public class HostConnectedServlet extends HttpServlet {
 					"</tr>");
 		}
 		
-		html.append("</table>");
-		html.append("</div>\r\n" + 
-				"	</body>\r\n" + 
-				"	<script src=\"js/profile.js\"></script>\r\n" + 
-				"</html>");
+		addition.append("</table></form>");
 		
-		return html.toString();
+		return HtmlBuilder.makeHostProfileHtml(addition.toString(), "Users") ;
 	}
 	
 	private String makeHostProfileHtml(Profile curr) {
-		StringBuilder html = new StringBuilder();
-		html.append(
-				"<!DOCTYPE html>\r\n" + 
-				"<html>\r\n" + 
-				"	<head>\r\n" + 
-				"		\r\n" + 
-				"		<head>\r\n" + 
-				"		<meta charset=\"ISO-8859-1\">\r\n" + 
-				"		 <title>Overlook Hotel</title>\r\n" + 
-				"            <meta name=\"author\" content=\"tim\">\r\n" + 
-				"            <meta name=\"keywords\" content=\"hotel\">\r\n" + 
-				"            <meta name=\"viewport\" content=\"width=device-width\">\r\n" + 
-				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/style.css\">\r\n" + 
-				"            <link type=\"text/css\" rel=\"stylesheet\" href=\"css/hostUsers.css\">\r\n" + 
-				"	</head>\r\n" + 
-				"	<body>\r\n" + 
-				"		<Header>\r\n" + 
-				"		\r\n" + 
-				"			<div class=\"navbar\">\r\n" + 
-				"				<form action=\"HostConnectedServlet\">\r\n" + 
-				"				<form action=\"HostConnectedServlet\" method=\"get\">\r\n" + 
-				"				<button type=\"submit\" id=\"logout\" class=\"navbarbutton\" name=\"input\" value=\"logout\">Logout</button>\r\n" + 
-				"				<button type=\"submit\" id=\"reservations\" class=\"navbarbutton\" name=\"input\" value=\"reservations\">Reservations</button>\r\n" + 
-				"				<button type=\"submit\" id=\"hostspeak\" class=\"navbarbutton\" name=\"input\" value=\"inquiry\">Inquiries</button>\r\n" + 
-				"				<button type=\"submit\" id=\"dashboard\" class=\"navbarbutton\" name=\"input\" value=\"users\">Users</button>\r\n" + 
-				"				<button type=\"submit\" id=\"profile\" class=\"navbarbutton\" name=\"input\" value=\"profile\">Profile</button>\r\n" + 
-				"				</form>" +
-				"				</form>\r\n" + 
-				"			</div>\r\n" + 
-				"		</Header>\r\n" + 
-				"			<h1 id=\"pagetitle\">Profile</h1>" +
-				"			<div class=\"body\">" +
-				""
-				);
+		StringBuilder addition = new StringBuilder();
 		
-		html.append(
+		addition.append(
 				"<table>"
 				);
 		
-		html.append("<tr>" +
+		addition.append("<tr>" +
 				"<th>User Id</th>\r\n" + 
 				"<th>First Name</th>\r\n" + 
 				"<th>Last Name</th>\r\n" + 
 				"<th>Password</th>" + 
 				"</tr>");
-		html.append("<tr>" +
+		addition.append("<tr>" +
 					"<td>" + curr.getUserId() + "</td>" +
 					"<td>" + curr.getFirstName() + "</td>" +
 					"<td>" + curr.getLastName() + "</td>" +
@@ -253,15 +148,18 @@ public class HostConnectedServlet extends HttpServlet {
 					"</tr>");
 		
 		
-		html.append("</table>");
-		html.append("</div>\r\n" + 
+		addition.append("</table>");
+		addition.append("</div>\r\n" + 
 				"	</body>\r\n" + 
 				"	<script src=\"js/profile.js\"></script>\r\n" + 
 				"</html>");
 		
-		return html.toString();
+		return HtmlBuilder.makeHostProfileHtml(addition.toString(), "Profile");
 	}
 	private String makeInquiryHostHtml() {
 		return null;
+	}
+	private String makeHostDashBoardHtml() {
+		return HtmlBuilder.makeHostProfileHtml("", "Dashboard");
 	}
 }

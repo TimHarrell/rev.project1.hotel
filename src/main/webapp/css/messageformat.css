@@ -1,0 +1,17 @@
+.messageul {
+	color:yellow;
+}
+
+.messageli {
+	color:yellow;
+}
+
+.messageuser {
+	color:yellow;
+}
+.messagebody {
+	max-width:300px;
+	word-wrap:break-word;
+	color: yellow;
+	padding-left:30px;
+}
