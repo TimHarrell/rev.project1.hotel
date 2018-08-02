@@ -3,8 +3,8 @@
 	text-align: center;
 }
 
-#topic {
-	
+#topic input {
+	width: 50%;
 }
 
 #body {

@@ -111,4 +111,14 @@
     <servlet-name>HostResponseServlet</servlet-name>
     <url-pattern>/HostResponseServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GuestMakeInquiryServlet</display-name>
+    <servlet-name>GuestMakeInquiryServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GuestMakeInquiryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GuestMakeInquiryServlet</servlet-name>
+    <url-pattern>/GuestMakeInquiryServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
