@@ -25,6 +25,13 @@ footer {
 	text-align: center;
 }
 
+#indexbackground {
+	 display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
 .body {
 
 	background-color: #8e0000;
