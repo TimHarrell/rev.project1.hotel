@@ -74,6 +74,60 @@ public class ProfileDao {
 		return profile;
 	}
 	
+	public static Boolean updateFirstNameById(String userId, String firstName) {
+		System.out.println("connecting...");
+		PreparedStatement ps = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+		    
+			String sql = "UPDATE PROFILES SET FIRSTNAME=? WHERE USERID=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,  firstName);
+			ps.setString(2, userId);
+			ps.execute();
+			
+			ps.close();
+		} 
+		catch(SQLException sql) {
+			sql.printStackTrace();
+			System.out.println("SQL issue");
+			return false;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static Boolean updateLastNameById(String userId, String lastName) {
+		System.out.println("connecting...");
+		PreparedStatement ps = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+		    
+			String sql = "UPDATE PROFILES SET FIRSTNAME=? WHERE USERID=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,  lastName);
+			ps.setString(2, userId);
+			ps.execute();
+			
+			ps.close();
+		} 
+		catch(SQLException sql) {
+			sql.printStackTrace();
+			System.out.println("SQL issue");
+			return false;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public static ArrayList<Profile> getAllProfiles() {
 		System.out.println("connecting...");
 		PreparedStatement ps = null;

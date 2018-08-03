@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.beans.Inquiry;
+import com.revature.beans.PendingReservation;
 import com.revature.beans.Profile;
 import com.revature.dao.InquiryDao;
+import com.revature.dao.ReservationsDao;
 
 /**
  * Servlet implementation class GuestConnectedServlet
@@ -61,10 +63,12 @@ public class GuestConnectedServlet extends HttpServlet {
 				resp.getWriter().write(makeInquiryGuestViewHtml(currUser));
 			}
 			else if(input.equals("profile")) {
-				
+				resp.setContentType("text/HTML");
+				resp.getWriter().write(makeProfileGuestHtml(currUser));
 			}
 			else if(input.equals("pending")) {
-				
+				resp.setContentType("text/HTML");
+				resp.getWriter().write(makePendingGuestHtml(currUser));
 			}
 			else if(input.equals("submit")) {
 				resp.setContentType("text/HTML");
@@ -136,7 +140,6 @@ public class GuestConnectedServlet extends HttpServlet {
 		mainPage.append("<tr>" +
 				"<th>Inquiry ID</th>\r\n" + 
 				"<th>Topic</th>\r\n" + 
-				"<th>Mark Resolved</th>" +
 				"<th>Respond</th>" +
 				"</tr>");
 		for(Inquiry inq : list) {
@@ -188,5 +191,45 @@ public class GuestConnectedServlet extends HttpServlet {
 		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Reservations", body.toString());
 	}
 	
+	private String makePendingGuestHtml(Profile profile) {
+		StringBuilder buttons = new StringBuilder();
+		buttons.append(
+				"	<button type='submit' class='subnavbarbutton' name='input' value='pending'>Pending</button>\r\n" + 
+				"	<button type='submit' class='subnavbarbutton' name='input' value='submit'>Submit</button>\r\n"	
+				);
+		
+		StringBuilder mainPage = new StringBuilder();
+		mainPage.append("<form action='GuestInquiryHandlerServlet' method='post'>" +
+				"<table>"
+				);
+		
+		ArrayList<PendingReservation> list = ReservationsDao.getPendingReservationsByuserId(profile.getUserId());
+		mainPage.append("<tr>" +
+				"<th>Transaction ID</th>\r\n" + 
+				"<th>Room Number</th>\r\n" + 
+				"<th>Date</th>" +
+				"</tr>");
+		for(PendingReservation pendres : list) {
+			mainPage.append("<tr>" +
+					"<td>" + pendres.getTransactionNumber() + "</td>" +
+					"<td>" + pendres.getRoomNumber() + "</td>" +
+					"<td>" + pendres.getDate() + "</td>" +
+					"</tr>");
+		}
+		
+		mainPage.append(
+				"</form>" +
+				"</table>");
+		
+		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Pending Reservations", mainPage.toString());
+	}
+	
+	private String makeProfileGuestHtml(Profile currUser) {
+		StringBuilder mainPage = new StringBuilder();
+		
+		mainPage.append(""
+				
+				);
+	}
 	
 }

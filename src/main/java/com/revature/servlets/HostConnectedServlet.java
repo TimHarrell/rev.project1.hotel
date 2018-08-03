@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.revature.beans.Inquiry;
 import com.revature.beans.PendingReservation;
 import com.revature.beans.Profile;
+import com.revature.beans.Room;
 import com.revature.dao.InquiryDao;
 import com.revature.dao.ProfileDao;
 import com.revature.dao.ReservationsDao;
@@ -44,10 +45,6 @@ public class HostConnectedServlet extends HttpServlet {
 				//resp.sendRedirect("LogoutServlet");
 			}
 			else if(input.equals("reservations")) {
-				//RequestDispatcher rd = req.getRequestDispatcher("HostReservationServlet");
-				//rd.forward(req, resp);
-				//resp.sendRedirect("HostReservationServlet");
-				//resp.setContentType("text/HTML");
 				resp.getWriter().write(makeHostReservationHtml());
 			}
 			else if(input.equals("inquiry")) {
@@ -63,7 +60,10 @@ public class HostConnectedServlet extends HttpServlet {
 				resp.setContentType("text/HTML");
 				resp.getWriter().write(makeHostProfileHtml(currUser));
 			}
-			
+			else if(input.contentEquals("rooms")) {
+				resp.setContentType("text/HTML");
+				resp.getWriter().write(makeHostRoomsHtml());
+			}
 			else {
 				System.out.println("sopmething went wrong with seleection in ProfileConnection Servlet");
 			}
@@ -200,9 +200,44 @@ public class HostConnectedServlet extends HttpServlet {
 			addition.append("</table></form>");
 		}
 				
-		return HtmlBuilder.makeHostProfileHtml("Submit", addition.toString());
+		return HtmlBuilder.makeHostProfileHtml( addition.toString(), "Reservations");
 	
 	}
+	
+	private String makeHostRoomsHtml() {
+		StringBuilder addition = new StringBuilder();
+		ArrayList<Room> rooms = new ArrayList<>();
+		for(int i = 0; i < 20; i++) {
+			rooms.add(new Room(i));
+		}
+		addition.append(
+				"<table>"
+				);
+		
+		addition.append("<tr>" +
+				"<th>Room Number</th>\r\n" + 
+				"<th>Number of Beds</th>\r\n" + 
+				"<th>Smoking Allowed</th>\r\n" + 
+				"<th>Cost</th>" + 
+				"</tr>");
+		for(Room room : rooms)
+		addition.append("<tr>" +
+					"<td>" + room.getRoomNumber() + "</td>" +
+					"<td>" + room.getNumBeds() + "</td>" +
+					"<td>" + room.getSmoking() + "</td>" +
+					"<td>" + "$ " + room.getPrice() + "/night" + "</td>" +
+					"</tr>");
+		
+		
+		addition.append("</table>");
+		addition.append("</div>\r\n" + 
+				"	</body>\r\n" + 
+				"	<script src=\"js/profile.js\"></script>\r\n" + 
+				"</html>");
+		
+		return HtmlBuilder.makeHostProfileHtml(addition.toString(), "Rooms");
+	}
+	
 	private String makeInquiryHostHtml() {
 		return null;
 	}

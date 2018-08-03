@@ -211,4 +211,14 @@
     <servlet-name>HostReservationServlet</servlet-name>
     <url-pattern>/HostReservationServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GuestPendingServlet</display-name>
+    <servlet-name>GuestPendingServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GuestPendingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GuestPendingServlet</servlet-name>
+    <url-pattern>/GuestPendingServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

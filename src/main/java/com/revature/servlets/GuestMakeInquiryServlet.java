@@ -34,11 +34,11 @@ public class GuestMakeInquiryServlet extends HttpServlet {
 				String body = req.getParameter("body");
 				
 				if(InquiryDao.makeInquiry(topic, body, currUser.getUserId()) == null) {
-					RequestDispatcher rd = req.getRequestDispatcher("ProfileConnectedServlet");
+					RequestDispatcher rd = req.getRequestDispatcher("GuestConnectedServlet");
 					rd.forward(req, resp); // if the inquiry already exists
 				}
 				else {
-				RequestDispatcher rd = req.getRequestDispatcher("ProfileConnectedServlet");
+				RequestDispatcher rd = req.getRequestDispatcher("GuestConnectedServlet");
 				rd.forward(req, resp);
 				}
 			}

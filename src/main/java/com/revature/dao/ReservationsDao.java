@@ -77,6 +77,7 @@ public class ReservationsDao {
 		}
 		return reservations;
 	}
+	
 	public static Boolean reservationExists(String userId, Date d, int rm) {
 		System.out.println("connecting...");
 		PreparedStatement ps = null;
@@ -110,6 +111,40 @@ public class ReservationsDao {
 		}
 			
 			return false;
+	}
+	
+	public static ArrayList<PendingReservation> getPendingReservationsByuserId(String userId) {
+		System.out.println("connecting");
+		PreparedStatement ps = null;
+		ArrayList<PendingReservation> reservations = new ArrayList<>();
+		try(Connection conn = ConnectionUtil.getConnection()) {
+		    
+			String sql = "SELECT * FROM  PENDING_RESERVATIONS WHERE UserId=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userId);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int tn = rs.getInt("TRANSACTIONNUMBER");
+				String uId = rs.getString("userId");
+				Date rd = rs.getDate("reservationDate");
+				int rn = rs.getInt("roomNumber");
+				reservations.add(new PendingReservation(rd, uId, rn,  tn));
+			}
+			
+				
+			rs.close();
+			ps.close();
+		}
+		catch(SQLException sql) {
+			sql.printStackTrace();
+			return null;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return reservations;
 	}
 	
 	public static PendingReservation getPendingReservationByTN(int tn) {

@@ -29,6 +29,7 @@ public class HtmlBuilder {
 				"				<button type='submit' id='reservations' class='navbarbutton' name='input' value='reservations'>Reservations</button>\r\n" + 
 				"				<button type='submit' id='hostspeak' class='navbarbutton' name='input' value='inquiry'>Inquiries</button>\r\n" + 
 				"				<button type='submit' id='dashboard' class='navbarbutton' name='input' value='users'>Users</button>\r\n" + 
+				"				<button type='submit' id='rooms' class='navbarbutton' name='input' value='rooms'>Rooms</button>" +
 				"				<button type='submit' id='profile' class='navbarbutton' name='input' value='profile'>Profile</button>\r\n" + 
 				"				</form>\r\n" + 
 				"			</div>\r\n" + 
