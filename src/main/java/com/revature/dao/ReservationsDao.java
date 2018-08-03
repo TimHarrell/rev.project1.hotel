@@ -54,13 +54,13 @@ public class ReservationsDao {
 		ArrayList<Reservation> reservations = new ArrayList<>();
 		try(Connection conn = ConnectionUtil.getConnection()) {
 		    
-			String sql = "SELECT * FROM  RESERVATIONS WHERE reservationDate=?";
+			String sql = "SELECT * FROM  RESERVATIONS WHERE RESERVATIONDATE=?";
 			ps = conn.prepareStatement(sql);
 			ps.setDate(1, date);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				reservations.add(new Reservation(rs.getDate("reservationDate"), rs.getString("userId"), rs.getInt("rommNumber")));
+				reservations.add(new Reservation(rs.getDate("reservationDate"), rs.getString("userId"), rs.getInt("roomNumber")));
 			}
 			
 				
@@ -224,6 +224,7 @@ public class ReservationsDao {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, tn);
 			
+			ps.execute();
 			ps.close();
 		}
 		catch(SQLException sql) {

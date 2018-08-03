@@ -29,12 +29,12 @@ public class HostReservationServlet extends HttpServlet {
 		if(approve != null) {
 			int tn = Integer.parseInt(approve);
 			ReservationsDao.approveReservationByTN(tn);
-			resp.sendRedirect("HostConnectServlet");
+			resp.sendRedirect("HostConnectedServlet");
 		}
 		else if(deny != null) {
 			int tn = Integer.parseInt(deny);
 			ReservationsDao.denyReservationByTN(tn);
-			resp.sendRedirect("HostConnectServlet");
+			resp.sendRedirect("HostConnectedServlet");
 		}
 		else {
 			resp.setContentType("text/html");
