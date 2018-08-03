@@ -29,7 +29,7 @@ public class GuestResponseServlet extends HttpServlet {
 		String currUser = (String) (profile.getUserId());
 		InquiryDao.submitMessage(inqId, response, currUser );
 		//req.setAttribute("input", "inquiry");
-		resp.sendRedirect("ProfileConnectedServlet");
+		resp.sendRedirect("GuestConnectedServlet");
 	}
 
 }

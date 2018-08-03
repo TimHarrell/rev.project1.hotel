@@ -12,7 +12,7 @@ import com.revature.beans.Reservation;
 import com.revature.util.ConnectionUtil;
 
 public class ReservationsDao {
-	public static ArrayList<PendingReservation> getAllReservations() {
+	public static ArrayList<PendingReservation> getAllPendingReservations() {
 		System.out.println("connecting...");
 		PreparedStatement ps = null;
 		ArrayList<PendingReservation> reservations = new ArrayList<>();
@@ -47,6 +47,36 @@ public class ReservationsDao {
 			return reservations;
 	}
 	
+	
+	public static ArrayList<Reservation> getAllReservationsByDate(Date date) {
+		System.out.println("connecting");
+		PreparedStatement ps = null;
+		ArrayList<Reservation> reservations = new ArrayList<>();
+		try(Connection conn = ConnectionUtil.getConnection()) {
+		    
+			String sql = "SELECT * FROM  RESERVATIONS WHERE reservationDate=?";
+			ps = conn.prepareStatement(sql);
+			ps.setDate(1, date);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				reservations.add(new Reservation(rs.getDate("reservationDate"), rs.getString("userId"), rs.getInt("rommNumber")));
+			}
+			
+				
+			rs.close();
+			ps.close();
+		}
+		catch(SQLException sql) {
+			sql.printStackTrace();
+			return null;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return reservations;
+	}
 	public static Boolean reservationExists(String userId, Date d, int rm) {
 		System.out.println("connecting...");
 		PreparedStatement ps = null;
@@ -82,7 +112,7 @@ public class ReservationsDao {
 			return false;
 	}
 	
-	public static PendingReservation getReservationByTN(int tn) {
+	public static PendingReservation getPendingReservationByTN(int tn) {
 		System.out.println("connecting...");
 		PreparedStatement ps = null;
 		PendingReservation reservation = null;
@@ -135,6 +165,7 @@ public class ReservationsDao {
 			ps.setDate(2, d);
 			ps.setInt(3, rm);
 		
+			ps.execute();
 			ps.close();
 		}
 		catch(SQLException sql) {
@@ -162,6 +193,8 @@ public class ReservationsDao {
 			
 			rs.close();
 			ps.close();
+			
+			denyReservationByTN(tn);
 		}
 		catch(SQLException sql) {
 			sql.printStackTrace();

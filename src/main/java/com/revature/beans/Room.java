@@ -68,5 +68,62 @@ public class Room {
 	public void setSmoking(Boolean smoking) {
 		this.smoking = smoking;
 	}
+
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public void setNumBeds(Integer numBeds) {
+		this.numBeds = numBeds;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((numBeds == null) ? 0 : numBeds.hashCode());
+		result = prime * result + price;
+		result = prime * result + roomNumber;
+		result = prime * result + ((smoking == null) ? 0 : smoking.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Room other = (Room) obj;
+		if (numBeds == null) {
+			if (other.numBeds != null)
+				return false;
+		} else if (!numBeds.equals(other.numBeds))
+			return false;
+		if (price != other.price)
+			return false;
+		if (roomNumber != other.roomNumber)
+			return false;
+		if (smoking == null) {
+			if (other.smoking != null)
+				return false;
+		} else if (!smoking.equals(other.smoking))
+			return false;
+		return true;
+	}
 	
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		
+		<meta charset='ISO-8859-1'>
+		 <title>Overlook Hotel</title>
+            <meta name='author' content='tim'>
+            <meta name='keywords' content='hotel'>
+            <meta name='viewport' content='width=device-width'>
+            <link type='text/css' rel='stylesheet' href='css/style.css'>
+            <link type='text/css' rel='stylesheet' href='css/GuestLogin.css'>
+			
+	</head>
+	<body> <!--  onload="form.action='ProfileConnected'"> -->
+		<header>
+		
+			<div class='navbar'>
+				<form action='GuestConnectedServlet' method='get'>
+				<button type='submit' id='logout' class='navbarbutton' name='input' value='logout'>Logout</button>
+				<button type='submit' id='reservations' class='navbarbutton' name='input' value='reservations'>Reservations</button>
+				<button type='submit' id='hostspeak' class='navbarbutton' name='input' value='inquiry'>Inquiry</button>
+				<button type='submit' id='profile' class='navbarbutton' name='input' value='profile'>Profile</button>
+				</form>
+				<form action='GuestReservationHandler' method='post'>
+				<button type='submit' class='subnavbarbutton' name='input' value='available'>Available</button>
+				<button type='submit' class='subnavbarbutton' name='input' value='pending'>Pending</button>
+				<button type='submit' class='subnavbarbutton' name='input' value='submit'>Submit</button>
+				</form>
+			</div>
+		</header>
+		<div>
+		
+			<div class='pagetitle'><h1>Submit</h1></div>
+			<form action='GuestReservationSubmitServlet'>
+			<input type='date' name='date'>
+			<input type="number" name="roomnumber" placeholder="room number" min='0' max='20' />
+			<br>
+			<input type='submit' name='input' value='Submit'>
+			</form>
+       	
+       	</div>
+	
+	<script src='js/profile.js'></script>
+</body></html>

@@ -70,7 +70,7 @@ public class HtmlBuilder {
 				"		<header>\r\n" + 
 				"		\r\n" + 
 				"			<div class='navbar'>\r\n" + 
-				"				<form action='ProfileConnectedServlet' method='get'>\r\n" + 
+				"				<form action='GuestConnectedServlet' method='get'>\r\n" + 
 				"				<button type='submit' id='logout' class='navbarbutton' name='input' value='logout'>Logout</button>\r\n" + 
 				"				<button type='submit' id='reservations' class='navbarbutton' name='input' value='reservations'>Reservations</button>\r\n" + 
 				"				<button type='submit' id='hostspeak' class='navbarbutton' name='input' value='inquiry'>Inquiry</button>\r\n" + 

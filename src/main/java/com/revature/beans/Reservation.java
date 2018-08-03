@@ -1,19 +1,20 @@
 package com.revature.beans;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Reservation {
 	private Date date;
-	private Profile profile;
+	private String userId;
 	private Integer roomNum;
 	
-	Reservation() {
+	public Reservation() {
 		super();
 	}
 	
-	Reservation(Date date, Profile profile, Integer roomNum ) {
+	public Reservation(Date date, String userId, Integer roomNum ) {
 		this.date = date;
-		this.profile = profile;
+		this.userId = userId;
 		this.roomNum = roomNum;
 	}
 	public Date getDate() {
@@ -22,11 +23,11 @@ public class Reservation {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Profile getProfile() {
-		return profile;
+	public String getuserId() {
+		return userId;
 	}
-	public void setProfile(Profile profile) {
-		this.profile = profile;
+	public void setProfile(String userId) {
+		this.userId = userId;
 	}
 	public Integer getRoomNum() {
 		return roomNum;
@@ -35,5 +36,12 @@ public class Reservation {
 		this.roomNum = roomNum;
 	}
 	
+	public static ArrayList<Room> Rooms() {
+		ArrayList<Room> rooms = new ArrayList<>();
+		for(int i = 0; i < 20; i++) {
+			rooms.add(new Room(i));
+		}
+		return rooms;
+	}
 	
 }

@@ -1,7 +1,6 @@
 package com.revature.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -16,12 +15,14 @@ import com.revature.beans.Profile;
 import com.revature.dao.InquiryDao;
 
 /**
- * Servlet implementation class ProfileConnected
+ * Servlet implementation class GuestConnectedServlet
  */
-public class ProfileConnectedServlet extends HttpServlet {
+public class GuestConnectedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	@Override
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String input = req.getParameter("input");
 		HttpSession session = req.getSession();
@@ -32,7 +33,8 @@ public class ProfileConnectedServlet extends HttpServlet {
 			Profile currUser = (Profile) session.getAttribute("profile");
 			
 			if(input == null) {
-				resp.sendRedirect("profile.html");
+				resp.setContentType("text/HTML");
+				resp.getWriter().write(makeGuestDashBoardHtml());
 				System.out.println("no input");
 			}
 			else if(input.equals("logout")) {
@@ -42,6 +44,7 @@ public class ProfileConnectedServlet extends HttpServlet {
 			}
 			else if(input.equals("reservations")) {
 				resp.setContentType("text/HTML");
+				resp.getWriter().write(makeReservationGuestHtml());
 				
 			}
 			else if(input.equals("inquiry")) { // Inquiry selected
@@ -58,15 +61,23 @@ public class ProfileConnectedServlet extends HttpServlet {
 				resp.getWriter().write(makeInquiryGuestViewHtml(currUser));
 			}
 			else if(input.equals("profile")) {
+				
 			}
-			
+			else if(input.equals("pending")) {
+				
+			}
+			else if(input.equals("submit")) {
+				resp.setContentType("text/HTML");
+				resp.getWriter().write(makeGuestReservationSubmit());
+			}
 			else {
 				System.out.println("sopmething went wrong with seleection in ProfileConnection Servlet");
 			}
 		}
 	}
+
 	
-	
+
 	private String makeInquiryGuestHtml() {
 		// buttons
 		StringBuilder buttons = new StringBuilder();
@@ -142,5 +153,38 @@ public class ProfileConnectedServlet extends HttpServlet {
 		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Inqueries: view", mainPage.toString());
 	}
 	
+	private String makeGuestDashBoardHtml() {
+		return HtmlBuilder.makeGuestProfileHtml("", "DashBoard", "");
+	}
 	
+	private String makeReservationGuestHtml() {
+		StringBuilder buttons = new StringBuilder();
+		buttons.append(
+				"		<button type='submit' class='subnavbarbutton' name='input' value='pending'>Pending</button>\r\n" + 
+				"		<button type='submit' class='subnavbarbutton' name='input' value='submit'>Submit</button>\r\n"  
+				);
+		StringBuilder body = new StringBuilder();
+		
+		
+		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Reservations", body.toString());
+	}
+	
+	private String makeGuestReservationSubmit() {
+		StringBuilder buttons = new StringBuilder();
+		buttons.append(
+				"	<button type='submit' class='subnavbarbutton' name='input' value='pending'>Pending</button>\r\n" + 
+				"	<button type='submit' class='subnavbarbutton' name='input' value='submit'>Submit</button>\r\n"	
+				);
+		
+		StringBuilder body = new StringBuilder();
+		body.append(
+				"	<form action='GuestReservationSubmitServlet' method='post'>\r\n" + 
+				"		<input type='date' name='date'>\r\n" + 
+				"		<br>\r\n" + 
+				"		<input type='submit' name='input' value='Submit'>\r\n" + 
+				"	</form>"
+						);
+		
+		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Reservations", body.toString());
+	}
 }
