@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.beans.Inquiry;
+import com.revature.beans.PendingReservation;
 import com.revature.beans.Profile;
 import com.revature.dao.InquiryDao;
 import com.revature.dao.ProfileDao;
+import com.revature.dao.ReservationsDao;
 
 /**
  * Servlet implementation class HostConnectedServlet
@@ -42,7 +44,11 @@ public class HostConnectedServlet extends HttpServlet {
 				//resp.sendRedirect("LogoutServlet");
 			}
 			else if(input.equals("reservations")) {
-				
+				//RequestDispatcher rd = req.getRequestDispatcher("HostReservationServlet");
+				//rd.forward(req, resp);
+				//resp.sendRedirect("HostReservationServlet");
+				//resp.setContentType("text/HTML");
+				resp.getWriter().write(makeHostReservationHtml());
 			}
 			else if(input.equals("inquiry")) {
 				resp.setContentType("text/HTML");
@@ -155,6 +161,47 @@ public class HostConnectedServlet extends HttpServlet {
 				"</html>");
 		
 		return HtmlBuilder.makeHostProfileHtml(addition.toString(), "Profile");
+	}
+	
+	private String makeHostReservationHtml() {
+
+		ArrayList<PendingReservation> reservations = ReservationsDao.getAllPendingReservations();
+		StringBuilder addition = new StringBuilder();
+		if(reservations == null) {
+			addition.append("no pending reservations");
+		}
+		else {
+			
+			addition.append(
+					"<form action='HostReservationServlet' method='post'>" +
+					"<table>\r\n" + 
+					"					<tr>\r\n" + 
+					"						<th>id</th>\r\n" + 
+					"						<th>date</th>\r\n" + 
+					"						<th>room number</th>\r\n" +
+					"						<th>user id</th>" +	
+					"					</tr>\r\n"  
+					); 
+			
+			for(PendingReservation a : reservations) {
+				addition.append("<tr>" + 
+						"<td>" + a.getTransactionNumber() + "</td>" + 
+						"<td>" + a.getDate() + "</td>" + 
+						"<td>" + a.getRoomNumber() + "</td>" +
+						"<td>" + a.getUserId() + "</td>"
+						);
+					
+				addition.append(
+							"<td><button type='submit' name='approve' value='" + a.getTransactionNumber() + "'>approve</button></td>" +
+							"<td><button type='submit' name='deny' value='" + a.getTransactionNumber() + "'>deny</button></td>" );
+				addition.append("</tr>");
+			}
+				
+			addition.append("</table></form>");
+		}
+				
+		return HtmlBuilder.makeHostProfileHtml("Submit", addition.toString());
+	
 	}
 	private String makeInquiryHostHtml() {
 		return null;

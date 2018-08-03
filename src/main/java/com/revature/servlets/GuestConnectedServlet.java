@@ -187,4 +187,6 @@ public class GuestConnectedServlet extends HttpServlet {
 		
 		return HtmlBuilder.makeGuestProfileHtml(buttons.toString(), "Reservations", body.toString());
 	}
+	
+	
 }

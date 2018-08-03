@@ -179,15 +179,19 @@ public class ReservationsDao {
 			
 			return true;
 	}
-	public static Boolean approveReservation(int tn) {
+	
+	public static Boolean approveReservationByTN(int tn) {
 		System.out.println("connecting...");
 		PreparedStatement ps = null;
 		
+		
 		try(Connection conn = ConnectionUtil.getConnection()) {
-		    
-			String sql = "INSERT INTO RESERVATIONS ";
+			PendingReservation pendRes = getPendingReservationByTN(tn);
+			String sql = "INSERT INTO RESERVATIONS (reservationdate, userId, roomNumber ) VALUES ( ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, tn);
+			ps.setDate(1, pendRes.getDate());
+			ps.setString(2,  pendRes.getUserId());
+			ps.setInt(3, pendRes.getRoomNumber());
 			ResultSet rs = ps.executeQuery();
 			
 			
